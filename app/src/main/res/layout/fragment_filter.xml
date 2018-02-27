@@ -1,0 +1,41 @@
+<ListView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/filter_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_rowSpan="10">
+
+
+    <TextView
+            android:id="@+id/image_filter"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="change picture"/>
+
+    <TextView
+            android:id="@+id/weight_filter"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="weight"/>
+
+    <TextView
+            android:id="@+id/budget_filter"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="budget"/>
+
+    <TextView
+            android:id="@+id/family_filter"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="family size"/>
+
+    <TextView
+            android:id="@+id/calories_filter"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="calories"/>
+
+
+
+</ListView>
