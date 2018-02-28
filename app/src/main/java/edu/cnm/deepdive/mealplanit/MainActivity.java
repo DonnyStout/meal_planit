@@ -26,10 +26,10 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
-                case R.id.navigation_calendar:
+                case R.id.navigation_account:
                     android.support.v4.app.FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                    CalendarFragment calendar = new CalendarFragment();
-                    transaction.replace(R.id.content, calendar).commit();
+                    AccountFragment account = new AccountFragment();
+                    transaction.replace(R.id.content, account).commit();
                     return true;
                 case R.id.navigation_plan:
                     transaction = getSupportFragmentManager().beginTransaction();
@@ -41,10 +41,10 @@ public class MainActivity extends AppCompatActivity {
                     BrowseFragment browse = new BrowseFragment();
                     transaction.replace(R.id.content, browse).commit();
                     return true;
-                case R.id.navigation_account:
+                case R.id.navigation_calendar:
                     transaction = getSupportFragmentManager().beginTransaction();
-                    AccountFragment account = new AccountFragment();
-                    transaction.replace(R.id.content, account).commit();
+                    CalendarFragment calendar = new CalendarFragment();
+                    transaction.replace(R.id.content, calendar).commit();
                     return true;
             }
             return false;
@@ -58,8 +58,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         android.support.v4.app.FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        CalendarFragment calendar = new CalendarFragment();
-        transaction.replace(R.id.content, calendar).commit();
+        AccountFragment account = new AccountFragment();
+        transaction.replace(R.id.content, account).commit();
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 

@@ -1,5 +1,6 @@
 package layout;
 
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -8,8 +9,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.DatePicker;
 import android.widget.ImageButton;
 import edu.cnm.deepdive.mealplanit.R;
+
+import java.util.Calendar;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,9 +29,12 @@ public class AccountFragment extends Fragment implements View.OnClickListener {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
+
     private String mParam1;
     private String mParam2;
+    private Mode mode = Mode.Date;
+    private Calendar calendar = null;
+
 
     private OnFragmentInteractionListener mListener;
 
@@ -93,6 +100,7 @@ public class AccountFragment extends Fragment implements View.OnClickListener {
         transaction.replace(R.id.content, filter).commit();
     }
 
+
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
@@ -108,5 +116,9 @@ public class AccountFragment extends Fragment implements View.OnClickListener {
         void onFragmentInteraction(Uri uri);
     }
 
+
+    public enum Mode {
+        Date
+    }
 
 }

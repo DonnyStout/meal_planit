@@ -8,14 +8,12 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="meal1_text">meal1</string>
-    <string name="meal2_text">meal2</string>
-    <string name="meal3_text">meal3</string>
-    <string name="snack1_text">snack1</string>
-    <string name="snack2_text">snack2</string>
+    <string name="add_meal">Add</string>
+    <string name="meal_text">meal</string>
+    <string name="snack_text">snack</string>
     <string name="ingredients_text">ingredients</string>
     <string name="food_text">food</string>
     <string name="welcome_label">Welcome to Meal Planit</string>
     <string name="account_name">firstName lastName</string>
-    <string name="account_username">firstName lastName - username</string>
+    <string name="account_username">firstName lastName</string>
 </resources>

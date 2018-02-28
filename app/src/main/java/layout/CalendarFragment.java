@@ -26,7 +26,7 @@ public class CalendarFragment extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_calendar, container, false);
-        CalendarView cv = view.findViewById(R.id.calendar_layout);
+        CalendarView cv = view.findViewById(R.id.calendar_view);
         cv.setOnDateChangeListener(null);
         return view;
     }
