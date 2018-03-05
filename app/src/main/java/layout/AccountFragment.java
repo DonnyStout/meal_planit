@@ -1,124 +1,75 @@
 package layout;
 
-import android.app.DatePickerDialog;
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import android.widget.DatePicker;
-import android.widget.ImageButton;
+import android.widget.*;
+import edu.cnm.deepdive.mealplanit.MainActivity;
 import edu.cnm.deepdive.mealplanit.R;
+import edu.cnm.deepdive.mealplanit.models.Person;
 
-import java.util.Calendar;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link AccountFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link AccountFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class AccountFragment extends Fragment implements View.OnClickListener {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
 
-    private String mParam1;
-    private String mParam2;
-    private Mode mode = Mode.Date;
-    private Calendar calendar = null;
+    public static final String FIRST_LAST_NAME_TEXT = "replaceable_name_text";
+    public static final String USERNAME_TEXT = "replaceable_username";
 
 
-    private OnFragmentInteractionListener mListener;
+    private String replaceableNameText;
+    private String replaceableUsernameText;
 
-    public AccountFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment AccountFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static AccountFragment newInstance(String param1, String param2) {
-        AccountFragment fragment = new AccountFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_account, container, false);
+        final View view = inflater.inflate(R.layout.fragment_account, container, false);
         ImageButton ub = view.findViewById(R.id.user_image);
+        TextView name = view.findViewById(R.id.replaceable_name);
+        name.setText(replaceableNameText);
         ub.setOnClickListener(this);
+        TextView user = view.findViewById(R.id.replaceable_user);
+        user.setText(replaceableUsernameText);
+
+
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//        Person person = new Person();
+//        person.setFirstName("Bob");
+//        person.setLastName("Star");
+//        person.setUsername("star*labs");
+//        ((MainActivity)getActivity()).getDatabase().personDao().insert(person);
+//
+////                Person personList = ((MainActivity)getActivity()).getDatabase().personDao().findUsername();
+////                final ListAdapter adapter = new ArrayAdapter<Person>(getActivity(), android.R.layout.simple_list_item_1, personList);
+////                getActivity().runOnUiThread(new Runnable() {
+////                    @Override
+////                    public void run() {
+////                        ((List<Person>) view).setAdapter(adapter);
+////                    }
+////                });
+//            }
+//        }).start();
         return view;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
+
+        public void onClick (View v){
+            android.support.v4.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
+            FilterFragment filter = new FilterFragment();
+            transaction.replace(R.id.content, filter).commit();
         }
+
+
+        public void text() {
+            Person bob = ((MainActivity) getActivity()).getDatabase().personDao()
+                    .findFirstName("Bob");
+
+        }
+
     }
-
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
-    @Override
-    public void onClick(View v) {
-        android.support.v4.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        FilterFragment filter = new FilterFragment();
-        transaction.replace(R.id.content, filter).commit();
-    }
-
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
-    }
-
-
-    public enum Mode {
-        Date
-    }
-
-}

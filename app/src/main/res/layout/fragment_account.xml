@@ -6,6 +6,15 @@
         android:layout_height="fill_parent"
         android:gravity="center_horizontal">
 
+
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Welcome back"
+            android:textAlignment="center"
+            android:textSize="30sp"
+    />
+
 <ImageButton
         android:id="@+id/user_image"
         android:layout_width="300dp"
@@ -14,23 +23,33 @@
         android:src="@drawable/user_picture"
         />
 
+    <!--<TextView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="@string/account_name"-->
+            <!--android:textAlignment="center"-->
+            <!--android:textSize="20sp"-->
+    <!--/>-->
+
+    <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="@string/username_text"-->
+            <!--android:textAlignment="center"-->
+            <!--android:textSize="20sp"-->
+    <!--/>-->
+
     <TextView
+            android:id="@+id/replaceable_name"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/account_username"
-            android:textAlignment="center"
-            android:textSize="20sp"
-    />
+            android:layout_height="match_parent"
+            android:text="@string/account_name"/>
 
     <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="username"
-            android:textAlignment="center"
-            android:textSize="20sp"
-    />
-
-
+            android:id="@+id/replaceable_user"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/username_text"/>
 
 
 </LinearLayout>

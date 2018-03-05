@@ -1,6 +1,7 @@
 package edu.cnm.deepdive.mealplanit;
 
 import android.app.FragmentTransaction;
+import android.arch.persistence.room.Room;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -19,6 +20,7 @@ import layout.PlanFragment;
 public class MainActivity extends AppCompatActivity {
 
     private TextView mTextMessage;
+    private MealDatabase database;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -65,12 +67,14 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-//    public void changeToPlan(View view) {
-//        android.support.v4.app.FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-//        PlanFragment plan = new PlanFragment();
-//        transaction.replace(R.id.content, plan).commit();
-//    }
 
+    public MealDatabase getDatabase() {
+        if (database == null) {
+            database = Room.databaseBuilder
+                    (getApplicationContext(), MealDatabase.class, "mealdatabase").build();
+        }
+        return database;
+    }
 
 
 }
