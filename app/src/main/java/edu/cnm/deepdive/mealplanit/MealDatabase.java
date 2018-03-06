@@ -3,13 +3,21 @@ package edu.cnm.deepdive.mealplanit;
 
 import android.arch.persistence.room.Database;
 import android.arch.persistence.room.RoomDatabase;
+import android.arch.persistence.room.TypeConverter;
+import android.arch.persistence.room.TypeConverters;
 import edu.cnm.deepdive.mealplanit.Dao.*;
+import edu.cnm.deepdive.mealplanit.converters.DateTypeConverter;
 import edu.cnm.deepdive.mealplanit.models.*;
 
-@Database(entities = {Food.class, Person.class, Browse.class}, version = 1)
+@TypeConverters({DateTypeConverter.class})
+@Database(entities = {Diet.class, Person.class, Plan.class, Restriction.class,
+PersonRestriction.class, PlanRestriction.class}, version = 1)
 public abstract class MealDatabase extends RoomDatabase {
 
-    public abstract FoodDao foodDao();
+    public abstract DietDao dietDao();
     public abstract PersonDao personDao();
-    public abstract BrowseDao browseDao();
+    public abstract PlanDao planDao();
+    public abstract RestrictionDao restrictionDao();
+    public abstract PlanRestrictionDao planRestrictionDao();
+    public abstract PersonRestrictionDao personRestrictionDao();
 }

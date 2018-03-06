@@ -4,10 +4,12 @@ package edu.cnm.deepdive.mealplanit.models;
 import android.arch.persistence.room.*;
 
 @Entity(indices = {@Index(value = {"username"}, unique = true)})
+
 public class Person {
 
 
     @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "person_id")
     private long personId;
 
     @ColumnInfo(name = "first_name")
@@ -19,8 +21,8 @@ public class Person {
     @ColumnInfo(name = "username")
     private String username;
 
-    @ColumnInfo(name = "food_restrictions_id")
-    private long foodRestrictionsId;
+    @ColumnInfo(name = "calories_per_day")
+    private long caloriesPerDay;
 
     public long getPersonId() {
         return personId;
@@ -54,18 +56,17 @@ public class Person {
         this.username = username;
     }
 
-    public long getFoodRestrictionsId() {
-        return foodRestrictionsId;
+    public long getCaloriesPerDay() {
+        return caloriesPerDay;
     }
 
-    public void setFoodRestrictionsId(long foodRestrictionsId) {
-        this.foodRestrictionsId = foodRestrictionsId;
+    public void setCaloriesPerDay(long caloriesPerDay) {
+        this.caloriesPerDay = caloriesPerDay;
     }
-
 
     @Override
     public String toString() {
-        return firstName + " " + lastName + " " + username + " " + foodRestrictionsId;
+        return personId+ " " + firstName + " " + lastName + " " + username + " " + caloriesPerDay;
     }
 
 }

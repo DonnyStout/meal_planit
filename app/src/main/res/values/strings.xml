@@ -11,7 +11,7 @@
     <string name="meal_text">meal</string>
     <string name="snack_text">snack</string>
     <string name="ingredients_text">ingredients</string>
-    <string name="food_text">food</string>
+    <string name="food_text">planRestriction</string>
     <string name="welcome_label">Welcome to Meal Planit</string>
     <string name="account_name">firstName lastName</string>
     <string name="username_text">username</string>

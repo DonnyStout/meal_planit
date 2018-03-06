@@ -4,13 +4,11 @@ package edu.cnm.deepdive.mealplanit.Dao;
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
+import android.arch.persistence.room.Update;
 import edu.cnm.deepdive.mealplanit.models.Person;
 
 @Dao
 public interface PersonDao {
-
-    @Query("SELECT * FROM person")
-    Person getAll();
 
 
     @Query("SELECT * FROM person WHERE first_name LIKE :firstName LIMIT 1")
@@ -25,9 +23,12 @@ public interface PersonDao {
     Person findUsername(String username);
 
 
-    @Query("SELECT * From person WHERE food_restrictions LIKE :foodRestrictions LIMIT 1")
-    Person findFoodRestrictions(String foodRestrictions);
+    @Query("SELECT * From person WHERE calories_per_day LIKE :caloriesPerDay LIMIT 1")
+    Person findCaloriesPerDay(long caloriesPerDay);
 
     @Insert
     long insert(Person person);
+
+    @Update
+    int update(Person person);
 }
