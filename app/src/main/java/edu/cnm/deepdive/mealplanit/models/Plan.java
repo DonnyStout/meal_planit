@@ -16,41 +16,48 @@ import static android.arch.persistence.room.ForeignKey.CASCADE;
         onDelete = CASCADE),
         @ForeignKey(entity = Diet.class,
         parentColumns = "diet_id",
-        childColumns = "diet_id")
-})
+        childColumns = "diet_id",
+                onDelete = CASCADE)})
 public class Plan {
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "plan_id")
     private long planId;
 
+    @NonNull
     @ColumnInfo(name = "date")
     private Date date;
 
     @ColumnInfo(name = "breakfast_id")
     private long breakfastId;
 
+    @NonNull
     @ColumnInfo(name = "breakfast_title")
     private String breakfastTitle;
 
+    @NonNull
     @ColumnInfo(name = "breakfast_url")
     private String breakfastUrl;
 
     @ColumnInfo(name = "lunch_id")
     private long lunchId;
 
+    @NonNull
     @ColumnInfo(name = "lunch_title")
     private String lunchTitle;
 
+    @NonNull
     @ColumnInfo(name = "lunch_url")
     private String lunchUrl;
 
     @ColumnInfo(name = "dinner_id")
     private long dinnerId;
 
+    @NonNull
     @ColumnInfo(name = "dinner_title")
     private String dinnerTitle;
 
+    @NonNull
     @ColumnInfo(name = "dinner_url")
     private String dinnerUrl;
 

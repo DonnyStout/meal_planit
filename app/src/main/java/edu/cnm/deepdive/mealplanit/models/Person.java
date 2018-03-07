@@ -2,8 +2,15 @@ package edu.cnm.deepdive.mealplanit.models;
 
 
 import android.arch.persistence.room.*;
+import android.support.annotation.NonNull;
+import static android.arch.persistence.room.ForeignKey.CASCADE;
 
-@Entity(indices = {@Index(value = {"username"}, unique = true)})
+@Entity(indices = {@Index(value = {"username"}, unique = true)},
+        foreignKeys = {@ForeignKey(entity = Diet.class,
+                parentColumns = "person_id",
+                childColumns = "person_id",
+                onDelete = CASCADE)})
+
 
 public class Person {
 
@@ -12,17 +19,23 @@ public class Person {
     @ColumnInfo(name = "person_id")
     private long personId;
 
-    @ColumnInfo(name = "first_name")
+    @NonNull
+    @ColumnInfo(name = "first_name", collate = ColumnInfo.NOCASE)
     private String firstName;
 
-    @ColumnInfo(name = "last_name")
+    @NonNull
+    @ColumnInfo(name = "last_name", collate = ColumnInfo.NOCASE)
     private String lastName;
 
-    @ColumnInfo(name = "username")
+    @NonNull
+    @ColumnInfo(name = "username", collate = ColumnInfo.NOCASE)
     private String username;
 
     @ColumnInfo(name = "calories_per_day")
     private long caloriesPerDay;
+
+    @ColumnInfo(name = "diet_id")
+    private long dietId;
 
     public long getPersonId() {
         return personId;

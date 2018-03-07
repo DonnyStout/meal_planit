@@ -10,8 +10,8 @@ import edu.cnm.deepdive.mealplanit.models.Restriction;
 @Dao
 public interface RestrictionDao {
 
-    @Query("SELECT * FROM restriction WHERE excluded_ingredients LIKE :excludedIngredients LIMIT 1")
-    Restriction findExcludedIngredients(String excludedIngredients);
+    @Query("SELECT * FROM restriction WHERE allergies LIKE :allergies LIMIT 1")
+    Restriction findAllergies(String allergies);
 
     @Insert
     long insert(Restriction restriction);

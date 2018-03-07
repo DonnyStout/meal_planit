@@ -4,6 +4,7 @@ package edu.cnm.deepdive.mealplanit.models;
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
+import android.support.annotation.NonNull;
 
 @Entity
 public class Diet {
@@ -13,8 +14,13 @@ public class Diet {
     @ColumnInfo(name = "diet_id")
     private long dietId;
 
+
     @ColumnInfo(name = "diet_type")
     private String dietType;
+
+    @ColumnInfo(name = "diet_type-url")
+    private String dietTypeUrl;
+
 
 
     public long getDietId() {

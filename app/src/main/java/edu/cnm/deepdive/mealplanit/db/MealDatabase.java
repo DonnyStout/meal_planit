@@ -1,4 +1,4 @@
-package edu.cnm.deepdive.mealplanit;
+package edu.cnm.deepdive.mealplanit.db;
 
 
 import android.arch.persistence.room.Database;
@@ -11,7 +11,7 @@ import edu.cnm.deepdive.mealplanit.models.*;
 
 @TypeConverters({DateTypeConverter.class})
 @Database(entities = {Diet.class, Person.class, Plan.class, Restriction.class,
-PersonRestriction.class, PlanRestriction.class}, version = 1)
+PersonRestriction.class, PlanRestriction.class}, version = 1, exportSchema = true)
 public abstract class MealDatabase extends RoomDatabase {
 
     public abstract DietDao dietDao();

@@ -14,9 +14,8 @@ public class Restriction {
     @ColumnInfo(name = "restriction_id")
     private long restrictionId;
 
-
-    @ColumnInfo(name = "excluded_ingredients")
-    private String excludedIngredients;
+    @ColumnInfo(name = "allergies")
+    private String allergies;
 
 
     public long getRestrictionId() {
@@ -27,16 +26,16 @@ public class Restriction {
         this.restrictionId = restrictionId;
     }
 
-    public String getExcludedIngredients() {
-        return excludedIngredients;
+    public String getAllergies() {
+        return allergies;
     }
 
-    public void setExcludedIngredients(String excludedIngredients) {
-        this.excludedIngredients = excludedIngredients;
+    public void setAllergies(String allergies) {
+        this.allergies = allergies;
     }
 
     @Override
     public String toString() {
-        return excludedIngredients + " " + excludedIngredients;
+        return allergies;
     }
 }

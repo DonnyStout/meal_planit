@@ -7,9 +7,14 @@ import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Update;
 import edu.cnm.deepdive.mealplanit.models.Person;
 
+import java.util.List;
+
 @Dao
 public interface PersonDao {
 
+
+    @Query("SELECT * FROM person")
+    List<Person> getAll();
 
     @Query("SELECT * FROM person WHERE first_name LIKE :firstName LIMIT 1")
     Person findFirstName(String firstName);

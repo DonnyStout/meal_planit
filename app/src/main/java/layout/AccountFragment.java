@@ -67,8 +67,8 @@ public class AccountFragment extends Fragment implements View.OnClickListener {
 
 
         public void text() {
-            Person bob = ((MainActivity) getActivity()).getDatabase().personDao()
-                    .findFirstName("Bob");
+//            Person person = ((MainActivity) getActivity()).getDatabase().personDao()
+//                    .findFirstName();
 
         }
 

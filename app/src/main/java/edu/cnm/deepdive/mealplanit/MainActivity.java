@@ -1,17 +1,13 @@
 package edu.cnm.deepdive.mealplanit;
 
-import android.app.FragmentTransaction;
 import android.arch.persistence.room.Room;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.GridLayout;
-import android.widget.TableLayout;
-import android.widget.TableRow;
 import android.widget.TextView;
+import edu.cnm.deepdive.mealplanit.db.MealDatabase;
 import layout.AccountFragment;
 import layout.BrowseFragment;
 import layout.CalendarFragment;
