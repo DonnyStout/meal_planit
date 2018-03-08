@@ -7,8 +7,8 @@ import static android.arch.persistence.room.ForeignKey.CASCADE;
 
 @Entity(indices = {@Index(value = {"username"}, unique = true)},
         foreignKeys = {@ForeignKey(entity = Diet.class,
-                parentColumns = "person_id",
-                childColumns = "person_id",
+                parentColumns = "diet_id",
+                childColumns = "diet_id",
                 onDelete = CASCADE)})
 
 
@@ -77,9 +77,17 @@ public class Person {
         this.caloriesPerDay = caloriesPerDay;
     }
 
+    public long getDietId() {
+        return dietId;
+    }
+
+    public void setDietId(long dietId) {
+        this.dietId = dietId;
+    }
+
     @Override
     public String toString() {
-        return personId+ " " + firstName + " " + lastName + " " + username + " " + caloriesPerDay;
+        return personId+ " " + firstName + " " + lastName + " " + username + " " + caloriesPerDay + " " + dietId;
     }
 
 }

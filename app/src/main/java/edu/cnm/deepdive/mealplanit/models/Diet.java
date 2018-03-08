@@ -18,10 +18,6 @@ public class Diet {
     @ColumnInfo(name = "diet_type")
     private String dietType;
 
-    @ColumnInfo(name = "diet_type-url")
-    private String dietTypeUrl;
-
-
 
     public long getDietId() {
         return dietId;

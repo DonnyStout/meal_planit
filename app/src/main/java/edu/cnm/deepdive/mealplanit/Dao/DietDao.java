@@ -1,14 +1,17 @@
 package edu.cnm.deepdive.mealplanit.Dao;
 
 
-import android.arch.persistence.room.Dao;
-import android.arch.persistence.room.Delete;
-import android.arch.persistence.room.Insert;
-import android.arch.persistence.room.Query;
+import android.arch.persistence.room.*;
 import edu.cnm.deepdive.mealplanit.models.Diet;
+
+import java.util.List;
 
 @Dao
 public interface DietDao {
+
+
+    @Query("SELECT * FROM diet")
+    List<Diet> getAll();
 
     @Query("SELECT * FROM diet WHERE diet_type LIKE :dietType LIMIT 1")
     Diet findDietType(String dietType);
@@ -16,6 +19,6 @@ public interface DietDao {
     @Insert
     long insert(Diet diet);
 
-    @Delete
-    int delete(Diet diet);
+    @Update
+    int update(Diet diet);
 }

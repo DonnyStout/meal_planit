@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "571bc10378ccf2cbb3f4dc91f71b28ce",
+    "identityHash": "a6101068540f3e046e1e81c5b2eeb347",
     "entities": [
       {
         "tableName": "Diet",
@@ -32,7 +32,7 @@
       },
       {
         "tableName": "Person",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`person_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `first_name` TEXT NOT NULL COLLATE NOCASE, `last_name` TEXT NOT NULL COLLATE NOCASE, `username` TEXT NOT NULL COLLATE NOCASE, `calories_per_day` INTEGER NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`person_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `first_name` TEXT NOT NULL COLLATE NOCASE, `last_name` TEXT NOT NULL COLLATE NOCASE, `username` TEXT NOT NULL COLLATE NOCASE, `calories_per_day` INTEGER NOT NULL, `diet_id` INTEGER NOT NULL, FOREIGN KEY(`person_id`) REFERENCES `Diet`(`person_id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
         "fields": [
           {
             "fieldPath": "personId",
@@ -63,6 +63,12 @@
             "columnName": "calories_per_day",
             "affinity": "INTEGER",
             "notNull": true
+          },
+          {
+            "fieldPath": "dietId",
+            "columnName": "diet_id",
+            "affinity": "INTEGER",
+            "notNull": true
           }
         ],
         "primaryKey": {
@@ -81,11 +87,23 @@
             "createSql": "CREATE UNIQUE INDEX `index_Person_username` ON `${TABLE_NAME}` (`username`)"
           }
         ],
-        "foreignKeys": []
+        "foreignKeys": [
+          {
+            "table": "Diet",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "person_id"
+            ],
+            "referencedColumns": [
+              "person_id"
+            ]
+          }
+        ]
       },
       {
         "tableName": "Plan",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`plan_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `date` INTEGER NOT NULL, `breakfast_id` INTEGER NOT NULL, `breakfast_title` TEXT NOT NULL, `breakfast_url` TEXT NOT NULL, `lunch_id` INTEGER NOT NULL, `lunch_title` TEXT NOT NULL, `lunch_url` TEXT NOT NULL, `dinner_id` INTEGER NOT NULL, `dinner_title` TEXT NOT NULL, `dinner_url` TEXT NOT NULL, `person_id` INTEGER NOT NULL, `diet_id` INTEGER, FOREIGN KEY(`person_id`) REFERENCES `Person`(`person_id`) ON UPDATE NO ACTION ON DELETE CASCADE , FOREIGN KEY(`diet_id`) REFERENCES `Diet`(`diet_id`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`plan_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `date` INTEGER NOT NULL, `breakfast_id` INTEGER NOT NULL, `breakfast_title` TEXT NOT NULL, `breakfast_url` TEXT NOT NULL, `lunch_id` INTEGER NOT NULL, `lunch_title` TEXT NOT NULL, `lunch_url` TEXT NOT NULL, `dinner_id` INTEGER NOT NULL, `dinner_title` TEXT NOT NULL, `dinner_url` TEXT NOT NULL, `person_id` INTEGER NOT NULL, `diet_id` INTEGER, FOREIGN KEY(`person_id`) REFERENCES `Person`(`person_id`) ON UPDATE NO ACTION ON DELETE CASCADE , FOREIGN KEY(`diet_id`) REFERENCES `Diet`(`diet_id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
         "fields": [
           {
             "fieldPath": "planId",
@@ -204,7 +222,7 @@
           },
           {
             "table": "Diet",
-            "onDelete": "NO ACTION",
+            "onDelete": "CASCADE",
             "onUpdate": "NO ACTION",
             "columns": [
               "diet_id"
@@ -378,7 +396,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"571bc10378ccf2cbb3f4dc91f71b28ce\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"a6101068540f3e046e1e81c5b2eeb347\")"
     ]
   }
 }

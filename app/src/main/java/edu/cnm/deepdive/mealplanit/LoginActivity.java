@@ -61,8 +61,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     Executors.newSingleThreadScheduledExecutor().execute(new Runnable() {
                         @Override
                         public void run() {
-                            data.execSQL("INSERT INTO restriction (allergies) VALUES ('Dairy'), ('Egg'), ('Gluten'), ('Grains'), ('Peanut')" +
-                                            "('Seafood'), ('Sesame'), ('Shellfish'), ('Soy'), ('Tree Nut'), ('Wheat')");
+                            data.execSQL("INSERT INTO restriction (allergies) VALUES ('Dairy'), ('Egg'), ('Gluten')," +
+                                    " ('Grains'), ('Peanut'), ('Seafood'), ('Sesame'), ('Shellfish'), ('Soy'), " +
+                                    "('Tree Nut'), ('Wheat')");
                                     data.execSQL("INSERT INTO diet (diet_type) VALUES ('No Diet'), ('Lacto Vegetarian'), " +
                                             "('Ovo Vegetarian'), ('Paleo'), ('Primal')" +
                                             "('Pescetarian'), ('Vegan'), ('Vegetarian'), ('Ketogenic'), ('Whole 30'");
