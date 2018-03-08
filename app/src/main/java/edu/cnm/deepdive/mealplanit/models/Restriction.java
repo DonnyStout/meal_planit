@@ -14,8 +14,8 @@ public class Restriction {
     @ColumnInfo(name = "restriction_id")
     private long restrictionId;
 
-    @ColumnInfo(name = "allergies")
-    private String allergies;
+    @ColumnInfo(name = "allergy") // FIXME
+    private String allergy;
 
 
     public long getRestrictionId() {
@@ -26,16 +26,16 @@ public class Restriction {
         this.restrictionId = restrictionId;
     }
 
-    public String getAllergies() {
-        return allergies;
+    public String getAllergy() {
+        return allergy;
     }
 
-    public void setAllergies(String allergies) {
-        this.allergies = allergies;
+    public void setAllergy(String allergy) {
+        this.allergy = allergy;
     }
 
     @Override
     public String toString() {
-        return allergies;
+        return allergy;
     }
 }

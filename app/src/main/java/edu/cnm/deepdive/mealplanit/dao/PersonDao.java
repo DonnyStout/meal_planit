@@ -1,4 +1,4 @@
-package edu.cnm.deepdive.mealplanit.Dao;
+package edu.cnm.deepdive.mealplanit.dao;
 
 
 import android.arch.persistence.room.Dao;

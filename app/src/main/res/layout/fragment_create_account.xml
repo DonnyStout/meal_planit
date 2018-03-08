@@ -57,7 +57,7 @@
             android:text="Allergies"/>
 
     <Spinner
-            android:id="@+id/allergies_box"
+            android:id="@+id/allergy_box"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
@@ -75,7 +75,9 @@
                 android:id="@+id/submit_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-        android:gravity="right"/>
+                android:gravity="right"
+                android:text="Submit"
+        />
 
 
 </LinearLayout>

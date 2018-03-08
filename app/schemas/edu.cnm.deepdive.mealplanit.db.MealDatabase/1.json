@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "a6101068540f3e046e1e81c5b2eeb347",
+    "identityHash": "f9eb0ebeb1cf858492692602678110bc",
     "entities": [
       {
         "tableName": "Diet",
@@ -32,7 +32,7 @@
       },
       {
         "tableName": "Person",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`person_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `first_name` TEXT NOT NULL COLLATE NOCASE, `last_name` TEXT NOT NULL COLLATE NOCASE, `username` TEXT NOT NULL COLLATE NOCASE, `calories_per_day` INTEGER NOT NULL, `diet_id` INTEGER NOT NULL, FOREIGN KEY(`person_id`) REFERENCES `Diet`(`person_id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`person_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `first_name` TEXT NOT NULL COLLATE NOCASE, `last_name` TEXT NOT NULL COLLATE NOCASE, `username` TEXT NOT NULL COLLATE NOCASE, `calories_per_day` INTEGER NOT NULL, `diet_id` INTEGER NOT NULL, FOREIGN KEY(`diet_id`) REFERENCES `Diet`(`diet_id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
         "fields": [
           {
             "fieldPath": "personId",
@@ -93,10 +93,10 @@
             "onDelete": "CASCADE",
             "onUpdate": "NO ACTION",
             "columns": [
-              "person_id"
+              "diet_id"
             ],
             "referencedColumns": [
-              "person_id"
+              "diet_id"
             ]
           }
         ]
@@ -235,7 +235,7 @@
       },
       {
         "tableName": "Restriction",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`restriction_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `allergies` TEXT)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`restriction_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `allergy` TEXT)",
         "fields": [
           {
             "fieldPath": "restrictionId",
@@ -244,8 +244,8 @@
             "notNull": true
           },
           {
-            "fieldPath": "allergies",
-            "columnName": "allergies",
+            "fieldPath": "allergy",
+            "columnName": "allergy",
             "affinity": "TEXT",
             "notNull": false
           }
@@ -396,7 +396,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"a6101068540f3e046e1e81c5b2eeb347\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"f9eb0ebeb1cf858492692602678110bc\")"
     ]
   }
 }

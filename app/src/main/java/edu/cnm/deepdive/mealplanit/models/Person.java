@@ -11,7 +11,6 @@ import static android.arch.persistence.room.ForeignKey.CASCADE;
                 childColumns = "diet_id",
                 onDelete = CASCADE)})
 
-
 public class Person {
 
 

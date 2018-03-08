@@ -1,4 +1,4 @@
-package edu.cnm.deepdive.mealplanit.Dao;
+package edu.cnm.deepdive.mealplanit.dao;
 
 
 import android.arch.persistence.room.*;
@@ -13,8 +13,8 @@ public interface RestrictionDao {
     @Query("SELECT * FROM restriction")
     List<Restriction> getAll();
 
-    @Query("SELECT * FROM restriction WHERE allergies LIKE :allergies LIMIT 1")
-    Restriction findAllergies(String allergies);
+    @Query("SELECT * FROM restriction WHERE allergy LIKE :allergy LIMIT 1")
+    Restriction findAllergy(String allergy);
 
     @Insert
     long insert(Restriction restriction);

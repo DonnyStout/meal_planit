@@ -1,4 +1,4 @@
-package edu.cnm.deepdive.mealplanit.Dao;
+package edu.cnm.deepdive.mealplanit.dao;
 
 
 import android.arch.persistence.room.Dao;
@@ -8,6 +8,9 @@ import edu.cnm.deepdive.mealplanit.models.PlanRestriction;
 
 @Dao
 public interface PlanRestrictionDao {
+
+    @Insert
+    long insert(PlanRestriction planRestriction);
 
     @Update
     int update(PlanRestriction planRestriction);
