@@ -31,33 +31,27 @@ public class Plan {
     @ColumnInfo(name = "breakfast_id")
     private long breakfastId;
 
-    @NonNull
     @ColumnInfo(name = "breakfast_title")
     private String breakfastTitle;
 
-    @NonNull
     @ColumnInfo(name = "breakfast_url")
     private String breakfastUrl;
 
     @ColumnInfo(name = "lunch_id")
     private long lunchId;
 
-    @NonNull
     @ColumnInfo(name = "lunch_title")
     private String lunchTitle;
 
-    @NonNull
     @ColumnInfo(name = "lunch_url")
     private String lunchUrl;
 
     @ColumnInfo(name = "dinner_id")
     private long dinnerId;
 
-    @NonNull
     @ColumnInfo(name = "dinner_title")
     private String dinnerTitle;
 
-    @NonNull
     @ColumnInfo(name = "dinner_url")
     private String dinnerUrl;
 

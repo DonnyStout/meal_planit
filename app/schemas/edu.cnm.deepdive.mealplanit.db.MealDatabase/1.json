@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "f9eb0ebeb1cf858492692602678110bc",
+    "identityHash": "8b3e73bb4e256c4deefdbc2849b9842b",
     "entities": [
       {
         "tableName": "Diet",
@@ -103,7 +103,7 @@
       },
       {
         "tableName": "Plan",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`plan_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `date` INTEGER NOT NULL, `breakfast_id` INTEGER NOT NULL, `breakfast_title` TEXT NOT NULL, `breakfast_url` TEXT NOT NULL, `lunch_id` INTEGER NOT NULL, `lunch_title` TEXT NOT NULL, `lunch_url` TEXT NOT NULL, `dinner_id` INTEGER NOT NULL, `dinner_title` TEXT NOT NULL, `dinner_url` TEXT NOT NULL, `person_id` INTEGER NOT NULL, `diet_id` INTEGER, FOREIGN KEY(`person_id`) REFERENCES `Person`(`person_id`) ON UPDATE NO ACTION ON DELETE CASCADE , FOREIGN KEY(`diet_id`) REFERENCES `Diet`(`diet_id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`plan_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `date` INTEGER NOT NULL, `breakfast_id` INTEGER NOT NULL, `breakfast_title` TEXT, `breakfast_url` TEXT, `lunch_id` INTEGER NOT NULL, `lunch_title` TEXT, `lunch_url` TEXT, `dinner_id` INTEGER NOT NULL, `dinner_title` TEXT, `dinner_url` TEXT, `person_id` INTEGER NOT NULL, `diet_id` INTEGER, FOREIGN KEY(`person_id`) REFERENCES `Person`(`person_id`) ON UPDATE NO ACTION ON DELETE CASCADE , FOREIGN KEY(`diet_id`) REFERENCES `Diet`(`diet_id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
         "fields": [
           {
             "fieldPath": "planId",
@@ -127,13 +127,13 @@
             "fieldPath": "breakfastTitle",
             "columnName": "breakfast_title",
             "affinity": "TEXT",
-            "notNull": true
+            "notNull": false
           },
           {
             "fieldPath": "breakfastUrl",
             "columnName": "breakfast_url",
             "affinity": "TEXT",
-            "notNull": true
+            "notNull": false
           },
           {
             "fieldPath": "lunchId",
@@ -145,13 +145,13 @@
             "fieldPath": "lunchTitle",
             "columnName": "lunch_title",
             "affinity": "TEXT",
-            "notNull": true
+            "notNull": false
           },
           {
             "fieldPath": "lunchUrl",
             "columnName": "lunch_url",
             "affinity": "TEXT",
-            "notNull": true
+            "notNull": false
           },
           {
             "fieldPath": "dinnerId",
@@ -163,13 +163,13 @@
             "fieldPath": "dinnerTitle",
             "columnName": "dinner_title",
             "affinity": "TEXT",
-            "notNull": true
+            "notNull": false
           },
           {
             "fieldPath": "dinnerUrl",
             "columnName": "dinner_url",
             "affinity": "TEXT",
-            "notNull": true
+            "notNull": false
           },
           {
             "fieldPath": "personId",
@@ -396,7 +396,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"f9eb0ebeb1cf858492692602678110bc\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"8b3e73bb4e256c4deefdbc2849b9842b\")"
     ]
   }
 }

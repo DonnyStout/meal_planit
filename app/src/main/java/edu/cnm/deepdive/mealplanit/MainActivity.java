@@ -15,62 +15,68 @@ import layout.PlanFragment;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TextView mTextMessage;
-    private MealDatabase database;
+  private TextView mTextMessage;
+  private MealDatabase database;
 
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
-
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            switch (item.getItemId()) {
-                case R.id.navigation_account:
-                    android.support.v4.app.FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                    AccountFragment account = new AccountFragment();
-                    transaction.replace(R.id.content, account).commit();
-                    return true;
-                case R.id.navigation_plan:
-                    transaction = getSupportFragmentManager().beginTransaction();
-                    PlanFragment plan = new PlanFragment();
-                    transaction.replace(R.id.content, plan).commit();
-                    return true;
-                case R.id.navigation_browse:
-                    transaction = getSupportFragmentManager().beginTransaction();
-                    BrowseFragment browse = new BrowseFragment();
-                    transaction.replace(R.id.content, browse).commit();
-                    return true;
-                case R.id.navigation_calendar:
-                    transaction = getSupportFragmentManager().beginTransaction();
-                    CalendarFragment calendar = new CalendarFragment();
-                    transaction.replace(R.id.content, calendar).commit();
-                    return true;
-            }
-            return false;
-        }
-
-    };
+  private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+      = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        android.support.v4.app.FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        AccountFragment account = new AccountFragment();
-        transaction.replace(R.id.content, account).commit();
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+      switch (item.getItemId()) {
+        case R.id.navigation_account:
+          android.support.v4.app.FragmentTransaction transaction = getSupportFragmentManager()
+              .beginTransaction();
+          AccountFragment account = new AccountFragment();
+          transaction.replace(R.id.content, account).commit();
+          return true;
+        case R.id.navigation_plan:
+          transaction = getSupportFragmentManager().beginTransaction();
+          PlanFragment plan = new PlanFragment();
+          transaction.replace(R.id.content, plan).commit();
+          return true;
+        case R.id.navigation_browse:
+          transaction = getSupportFragmentManager().beginTransaction();
+          BrowseFragment browse = new BrowseFragment();
+          transaction.replace(R.id.content, browse).commit();
+          return true;
+        case R.id.navigation_calendar:
+          transaction = getSupportFragmentManager().beginTransaction();
+          CalendarFragment calendar = new CalendarFragment();
+          transaction.replace(R.id.content, calendar).commit();
+          return true;
+      }
+      return false;
     }
 
+  };
 
-    public MealDatabase getDatabase() {
-        if (database == null) {
-            database = Room.databaseBuilder
-                    (getApplicationContext(), MealDatabase.class, "mealdatabase").build();
-        }
-        return database;
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+
+    android.support.v4.app.FragmentTransaction transaction = getSupportFragmentManager()
+        .beginTransaction();
+    AccountFragment account = new AccountFragment();
+    account.setArguments(getIntent().getExtras());
+    transaction.replace(R.id.content, account).commit();
+    BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+    navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
+  }
+
+
+  public MealDatabase getDatabase() {
+    if (database == null) {
+      database = Room.databaseBuilder
+          (getApplicationContext(), MealDatabase.class, "mealdatabase").build();
     }
+    return database;
+  }
+
+
+
 
 
 }

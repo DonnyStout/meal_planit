@@ -1,6 +1,7 @@
 package edu.cnm.deepdive.mealplanit;
 
 import android.content.Intent;
+import android.content.SharedPreferences.Editor;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -23,6 +24,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private Button enter;
     private Button create;
     private Snackbar snack;
+    private String loginString;
+    private Bundle bundle;
 
 
     @Override
@@ -48,6 +51,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         person = persondao.findUsername(username);
     }
 
+    public String getText() {
+      loginString = login.getText().toString();
+      return loginString;
+    }
+
 
     public MealDatabase getDatabase() {
         return MealDatabase.getInstance(this);
@@ -56,19 +64,30 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
 
     @Override
-    public void onClick(View v) {
-        if (enter.getId() == v.getId() && person.equals(login.getText().toString())) {
-            Intent intent = new Intent(this, MainActivity.class);
+    public void onClick(final View v) {
+
+      new Thread(new Runnable() {
+        @Override
+        public void run() {
+          getText();
+          userLogin(loginString);
+          if (enter.getId() == v.getId() && person != null) {
+            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+            bundle = new Bundle();
+            Editor editor = getSharedPreferences("user", MODE_PRIVATE).edit();
+            editor.putString("username", person.getUsername());
+            editor.apply();
+            intent.putExtras(bundle);
             startActivity(intent);
-        }
-        else if (create.getId() == v.getId()) {
+          }else if (create.getId() == v.getId()) {
             FragmentTransaction transitionSupport = getSupportFragmentManager().beginTransaction();
             CreateAccountFragment createAccountFragment = new CreateAccountFragment();
             transitionSupport.replace(R.id.box, createAccountFragment).commit();
-        } else {
+          } else {
             snack = Snackbar.make(findViewById(R.id.coordinator_layout), "Username not found", Snackbar.LENGTH_LONG);
             snack.show();
+          }
         }
+      }).start();
     }
-
 }
