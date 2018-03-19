@@ -42,11 +42,6 @@ public class MainActivity extends AppCompatActivity {
           AccountFragment account = new AccountFragment();
           transaction.replace(R.id.content, account).commit();
           return true;
-        case R.id.navigation_plan:
-          transaction = getSupportFragmentManager().beginTransaction();
-          PlanFragment plan = new PlanFragment();
-          transaction.replace(R.id.content, plan).commit();
-          return true;
         case R.id.navigation_browse:
           transaction = getSupportFragmentManager().beginTransaction();
           BrowseFragment browse = new BrowseFragment();

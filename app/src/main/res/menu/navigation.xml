@@ -8,11 +8,6 @@
             android:title="@string/title_account"/>
 
     <item
-            android:id="@+id/navigation_plan"
-            android:icon="@drawable/ic_view_list_black_24dp"
-            android:title="@string/title_plan"/>
-
-    <item
             android:id="@+id/navigation_browse"
             android:icon="@drawable/ic_search_black_24dp"
             android:title="@string/title_browse"/>

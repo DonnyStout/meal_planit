@@ -27,6 +27,7 @@ public class CalendarFragment extends Fragment implements OnDateChangeListener {
 
 
   private String username;
+  public Bundle date;
 
   public CalendarFragment() {
     // Required empty public constructor
@@ -40,6 +41,7 @@ public class CalendarFragment extends Fragment implements OnDateChangeListener {
     View view = inflater.inflate(R.layout.fragment_calendar, container, false);
     username = getActivity().getSharedPreferences("user", Context.MODE_PRIVATE)
         .getString("username", null);
+
     CalendarView cv = view.findViewById(R.id.calendar_view);
     cv.setOnDateChangeListener(this);
     return view;
@@ -61,9 +63,11 @@ public class CalendarFragment extends Fragment implements OnDateChangeListener {
 
   private class PlanInstance extends AsyncTask<Date, Object, Plan> {
 
+    private Plan planInstance;
+
     @Override
     protected Plan doInBackground(Date... date) {
-      Plan planInstance = MealDatabase.getInstance(getActivity()).planDao().findDate(date[0]);
+      planInstance = MealDatabase.getInstance(getActivity()).planDao().findDate(date[0]);
       if (planInstance == null) {
         planInstance = new Plan();
         Person person = MealDatabase.getInstance(getActivity()).personDao().findUsername(username);
@@ -88,9 +92,12 @@ public class CalendarFragment extends Fragment implements OnDateChangeListener {
 
     @Override
     protected void onPostExecute(Plan plan) {
+      date = new Bundle();
+      date.putLong("plan_date", plan.getDate().getTime());
       android.support.v4.app.FragmentTransaction transaction = getFragmentManager()
           .beginTransaction();
       PlanFragment planFragment = new PlanFragment();
+      planFragment.setArguments(date);
       transaction.replace(R.id.content, planFragment).commit();
     }
   }
