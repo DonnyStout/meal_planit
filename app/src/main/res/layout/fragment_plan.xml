@@ -50,7 +50,7 @@
   </android.support.v7.widget.CardView>
 
   <android.support.v7.widget.CardView
-    android:id="@+id/lunch_card_view2"
+    android:id="@+id/lunch_card_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -124,7 +124,7 @@
         />
 
       <TextView
-        android:id="@+id/ready_text"
+        android:id="@+id/dinner_ready_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toEndOf="@+id/dinner_photo"
