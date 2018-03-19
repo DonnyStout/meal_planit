@@ -7,10 +7,30 @@
         android:columnCount="3"
 >
 
-    <SearchView
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_column="0"/>
+    <EditText
+      android:id="@+id/limit_license_field"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      />
+
+    <EditText
+      android:id="@+id/number_field"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      />
+
+    <EditText
+      android:id="@+id/tags_field"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      />
+
+    <Button
+      android:id="@+id/browse_search_button"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="Search"
+      />
 
     <android.support.v7.widget.RecyclerView
             android:id="@+id/search_view"

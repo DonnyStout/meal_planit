@@ -9,75 +9,78 @@
   <LinearLayout
     android:id="@+id/create_linear_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical">
 
     <TextView
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:text="First Name"/>
+      android:text="@string/first_name_title"
+      android:paddingStart="15dp"/>
 
     <EditText
       android:id="@+id/first_name_field"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"/>
+      android:layout_width="100dp"
+      android:layout_height="45dp"/>
 
     <TextView
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:text="Last Name"/>
+      android:text="@string/last_name_title"
+      android:paddingStart="15dp"/>
 
     <EditText
       android:id="@+id/last_name_field"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"/>
+      android:layout_width="100dp"
+      android:layout_height="45dp"/>
 
     <TextView
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:text="Username"/>
+      android:text="@string/username_title"
+      android:paddingStart="15dp"/>
 
     <EditText
       android:id="@+id/username_set_field"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"/>
+      android:layout_width="100dp"
+      android:layout_height="45dp"/>
 
     <TextView
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:text="Target daily calories"/>
+      android:text="@string/target_daily_calories_title"/>
 
     <Spinner
       android:id="@+id/calories_spinner"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"/>
+      android:layout_width="100dp"
+      android:layout_height="45dp"/>
 
     <TextView
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:text="Allergies"/>
+      android:text="@string/allergies_title"
+      android:paddingStart="15dp"/>
 
     <Spinner
       android:id="@+id/allergy_box"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"/>
+      android:layout_width="100dp"
+      android:layout_height="45dp"/>
 
     <TextView
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:text="Diet"/>
+      android:text="@string/diet_title"/>
 
     <Spinner
       android:id="@+id/diet_box"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"/>
+      android:layout_width="100dp"
+      android:layout_height="45dp"/>
 
     <Button
       android:id="@+id/submit_button"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:gravity="right"
-      android:text="Submit"
+      android:text="@string/submit_button"
       />
 
 

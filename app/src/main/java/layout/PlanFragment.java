@@ -15,16 +15,31 @@ import edu.cnm.deepdive.mealplanit.R;
 public class PlanFragment extends Fragment {
 
 
-    public PlanFragment() {
-        // Required empty public constructor
-    }
+  public static final String BASE_URL = "https://spoonacular.com/recipeImages/";
+
+  public static final String RESOLUTION_URL = "";
 
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_plan, container, false);
-    }
+  private String idUrl;
+  private String extensionUrl;
+
+
+  public PlanFragment() {
+    // Required empty public constructor
+  }
+
+
+  @Override
+  public View onCreateView(LayoutInflater inflater, ViewGroup container,
+      Bundle savedInstanceState) {
+    // Inflate the layout for this fragment
+    return inflater.inflate(R.layout.fragment_plan, container, false);
+  }
+
+//  HttpResponse<JsonNode> response = Unirest.get(
+//      "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/mealplans/generate?diet=no+diet&exclude=paleo&targetCalories=2500&timeFrame=day")
+//      .header("X-Mashape-Key", "")
+//      .header("Accept", "application/json")
+//      .asJson();
 
 }

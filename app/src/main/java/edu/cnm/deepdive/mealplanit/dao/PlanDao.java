@@ -1,7 +1,7 @@
 package edu.cnm.deepdive.mealplanit.dao;
 
 import android.arch.persistence.room.*;
-import edu.cnm.deepdive.mealplanit.models.Plan;
+import edu.cnm.deepdive.mealplanit.model.Plan;
 
 import java.util.Date;
 

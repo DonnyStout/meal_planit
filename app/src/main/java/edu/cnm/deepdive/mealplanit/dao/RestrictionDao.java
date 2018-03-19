@@ -2,7 +2,7 @@ package edu.cnm.deepdive.mealplanit.dao;
 
 
 import android.arch.persistence.room.*;
-import edu.cnm.deepdive.mealplanit.models.Restriction;
+import edu.cnm.deepdive.mealplanit.model.Restriction;
 
 import java.util.List;
 

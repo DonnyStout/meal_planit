@@ -1,4 +1,4 @@
-package edu.cnm.deepdive.mealplanit.models;
+package edu.cnm.deepdive.mealplanit.model;
 
 
 import android.arch.persistence.room.*;

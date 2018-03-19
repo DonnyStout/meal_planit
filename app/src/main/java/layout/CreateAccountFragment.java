@@ -11,18 +11,17 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 
 import android.widget.*;
-import edu.cnm.deepdive.mealplanit.LoginActivity;
 import edu.cnm.deepdive.mealplanit.dao.DietDao;
 import edu.cnm.deepdive.mealplanit.dao.PersonDao;
 import edu.cnm.deepdive.mealplanit.dao.PlanRestrictionDao;
 import edu.cnm.deepdive.mealplanit.dao.RestrictionDao;
 import edu.cnm.deepdive.mealplanit.R;
 import edu.cnm.deepdive.mealplanit.db.MealDatabase;
-import edu.cnm.deepdive.mealplanit.models.Diet;
-import edu.cnm.deepdive.mealplanit.models.Person;
-import edu.cnm.deepdive.mealplanit.models.PersonRestriction;
-import edu.cnm.deepdive.mealplanit.models.PlanRestriction;
-import edu.cnm.deepdive.mealplanit.models.Restriction;
+import edu.cnm.deepdive.mealplanit.model.Diet;
+import edu.cnm.deepdive.mealplanit.model.Person;
+import edu.cnm.deepdive.mealplanit.model.PersonRestriction;
+import edu.cnm.deepdive.mealplanit.model.PlanRestriction;
+import edu.cnm.deepdive.mealplanit.model.Restriction;
 
 import java.util.Arrays;
 import java.util.List;

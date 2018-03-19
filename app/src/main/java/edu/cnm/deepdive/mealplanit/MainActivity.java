@@ -13,6 +13,11 @@ import layout.BrowseFragment;
 import layout.CalendarFragment;
 import layout.PlanFragment;
 
+/**
+ * The Main Activity for the entire application that controls the functions of the fragments for
+ * <code>AccountFragment</code>, <code>BrowseFragment</code>, <code>CalendarFragment</code>,
+ * <code>PlanFragment</code>, and <code>FilterFragment</code>.
+ */
 public class MainActivity extends AppCompatActivity {
 
   private TextView mTextMessage;
@@ -21,6 +26,13 @@ public class MainActivity extends AppCompatActivity {
   private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
       = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
+    /**
+     * Switch for the logic of which fragment is displayed depending on which tab is selected
+     * in the bottom of the navigation.
+     *
+     * @param item            The navigation tab.
+     * @return                Whether an item has been selected.
+     */
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
       switch (item.getItemId()) {
@@ -51,6 +63,8 @@ public class MainActivity extends AppCompatActivity {
 
   };
 
+
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -67,6 +81,12 @@ public class MainActivity extends AppCompatActivity {
   }
 
 
+  /**
+   * Getting an instance of the <code>MealDatabase</code> and if empty gets the [@link Context] and builds the database
+   * before returning the database.
+   *
+   * @return                    Mealdatabase.
+   */
   public MealDatabase getDatabase() {
     if (database == null) {
       database = Room.databaseBuilder

@@ -1,8 +1,7 @@
-package edu.cnm.deepdive.mealplanit.models;
+package edu.cnm.deepdive.mealplanit.model;
 
 
 import android.arch.persistence.room.*;
-import android.support.annotation.NonNull;
 
 import static android.arch.persistence.room.ForeignKey.CASCADE;
 

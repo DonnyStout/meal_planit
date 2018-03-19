@@ -11,9 +11,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import edu.cnm.deepdive.mealplanit.dao.PersonDao;
 import edu.cnm.deepdive.mealplanit.db.MealDatabase;
-import edu.cnm.deepdive.mealplanit.models.Person;
+import edu.cnm.deepdive.mealplanit.model.Person;
 import layout.CreateAccountFragment;
 
+/**
+ * A login activity that queries the database to see if a username that is provided exists and if not allows
+ * for a new user to create an account.
+ */
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
 
@@ -46,23 +50,30 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         database = getDatabase();
     }
 
-    public void userLogin(String username) {
+
+  private void userLogin(String username) {
         persondao = database.personDao();
         person = persondao.findUsername(username);
     }
 
-    public String getText() {
+    private String getText() {
       loginString = login.getText().toString();
       return loginString;
     }
 
 
-    public MealDatabase getDatabase() {
+    private MealDatabase getDatabase() {
         return MealDatabase.getInstance(this);
     }
 
 
-
+  /**
+   * Logic for logging in comparing the username provided against the database and seeing if it exists.
+   * If so it switches to the <code>AccountFragment</code>. Also allows the user to create a new account by switching to
+   * the <code>CreateAccountFragment</code>.
+   *
+   * @param v             The enter and create [@link Button]
+   */
     @Override
     public void onClick(final View v) {
 

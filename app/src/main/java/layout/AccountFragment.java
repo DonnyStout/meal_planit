@@ -9,18 +9,20 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import android.widget.*;
-import edu.cnm.deepdive.mealplanit.MainActivity;
 import edu.cnm.deepdive.mealplanit.R;
-import edu.cnm.deepdive.mealplanit.dao.PersonDao;
 import edu.cnm.deepdive.mealplanit.db.MealDatabase;
-import edu.cnm.deepdive.mealplanit.models.Person;
+import edu.cnm.deepdive.mealplanit.model.Person;
 
-
+/**
+ * A [@link Fragment] class that the user is greeted with after logging in. It is the main interface
+ * of the entire application. The contents displayed within this fragment are the user's name and username
+ * along with a picture that the user can upload.
+ */
 public class AccountFragment extends Fragment implements View.OnClickListener {
 
 
-  public static final String FIRST_LAST_NAME_TEXT = "replaceable_name_text";
-  public static final String USERNAME_TEXT = "replaceable_username";
+  private static final String FIRST_LAST_NAME_TEXT = "replaceable_name_text";
+  private static final String USERNAME_TEXT = "replaceable_username";
 
 
   private String replaceableNameText;
@@ -30,6 +32,15 @@ public class AccountFragment extends Fragment implements View.OnClickListener {
   private TextView name;
 
 
+  /**
+   * Uses a saved instance of the username the user entered in the login activity using shared preferences.
+   * Creates all the instances of [@link Button], [@link EditText], and [@link TextView].
+   *
+   * @param inflater                     Inflates the view from the xml file.
+   * @param container                    
+   * @param savedInstanceState
+   * @return
+   */
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
       Bundle savedInstanceState) {
@@ -37,9 +48,9 @@ public class AccountFragment extends Fragment implements View.OnClickListener {
     final View view = inflater.inflate(R.layout.fragment_account, container, false);
     username = getActivity().getSharedPreferences("user", Context.MODE_PRIVATE)
                             .getString("username", null);
-    ImageButton ub = view.findViewById(R.id.user_image);
+    ImageButton imageButton = view.findViewById(R.id.user_image);
     name = view.findViewById(R.id.replaceable_name);
-    ub.setOnClickListener(this);
+    imageButton.setOnClickListener(this);
     TextView user = view.findViewById(R.id.replaceable_user);
     user.setText(username);
     new FindUser().execute();

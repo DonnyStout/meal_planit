@@ -6,7 +6,6 @@
     <string name="title_browse">Browse</string>
     <string name="title_account">Account</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="add_meal">Add</string>
     <string name="meal_text">meal</string>
     <string name="snack_text">snack</string>
@@ -17,18 +16,15 @@
     <string name="username_text">username</string>
     <string name="title_activity_login">Sign in</string>
 
-    <!-- Strings related to login -->
-    <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password (optional)</string>
-    <string name="action_sign_in">Sign in or register</string>
-    <string name="action_sign_in_short">Sign in</string>
-    <string name="error_invalid_email">This email address is invalid</string>
-    <string name="error_invalid_password">This password is too short</string>
-    <string name="error_incorrect_password">This password is incorrect</string>
-    <string name="error_field_required">This field is required</string>
-    <string name="permission_rationale">"Contacts permissions are needed for providing email completions."</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+  <string name="enter_username_text">Enter Username:</string>
+    <string name="enter_username_text_field">Username</string>
+  <string name="welcome_text_account">Welcome</string>
+    <string name="first_name_title">First Name</string>
+    <string name="last_name_title">Last Name</string>
+    <string name="username_title">Username</string>
+    <string name="target_daily_calories_title">Target daily calories</string>
+    <string name="allergies_title">Allergies</string>
+    <string name="diet_title">Diet</string>
+    <string name="submit_button">Submit</string>
 
 </resources>

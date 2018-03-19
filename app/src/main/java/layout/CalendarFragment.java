@@ -13,11 +13,10 @@ import android.widget.CalendarView;
 import android.widget.CalendarView.OnDateChangeListener;
 import edu.cnm.deepdive.mealplanit.R;
 import edu.cnm.deepdive.mealplanit.db.MealDatabase;
-import edu.cnm.deepdive.mealplanit.models.Person;
-import edu.cnm.deepdive.mealplanit.models.PersonRestriction;
-import edu.cnm.deepdive.mealplanit.models.Plan;
-import edu.cnm.deepdive.mealplanit.models.PlanRestriction;
-import java.time.Year;
+import edu.cnm.deepdive.mealplanit.model.Person;
+import edu.cnm.deepdive.mealplanit.model.PersonRestriction;
+import edu.cnm.deepdive.mealplanit.model.Plan;
+import edu.cnm.deepdive.mealplanit.model.PlanRestriction;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -51,6 +50,12 @@ public class CalendarFragment extends Fragment implements OnDateChangeListener {
   public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
     Calendar calendar = Calendar.getInstance();
     calendar.set(year, month, dayOfMonth);
+    calendar.clear(Calendar.HOUR_OF_DAY);
+    calendar.clear(Calendar.MINUTE);
+    calendar.clear(Calendar.SECOND);
+    calendar.clear(Calendar.MILLISECOND);
+    calendar.clear(Calendar.ZONE_OFFSET);
+    calendar.clear(Calendar.DST_OFFSET);
     new PlanInstance().execute(calendar.getTime());
   }
 

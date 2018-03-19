@@ -1,54 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/coordinator_layout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:context="edu.cnm.deepdive.mealplanit.LoginActivity">
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:id="@+id/coordinator_layout"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:orientation="vertical"
+  tools:context="edu.cnm.deepdive.mealplanit.LoginActivity">
 
-    <LinearLayout
-            android:id="@+id/box"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+
+  <LinearLayout
+    android:id="@+id/box"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
     <TextView
-            android:id="@+id/login_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Enter Username:"
-    />
+      android:id="@+id/login_text"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="@string/enter_username_text"
+      android:paddingStart="50dp"
+      android:paddingEnd="150dp"
+      android:textSize="20sp"
+      />
 
-    <EditText
-            android:id="@+id/login_field"
-            android:layout_width="wrap_content"
-              android:layout_height="wrap_content"/>
-
+    <android.support.v7.widget.AppCompatEditText
+      android:id="@+id/login_field"
+      android:layout_width="250dp"
+      android:layout_height="40dp"/>
 
 
     <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content">
 
-    <Button
-            android:id="@+id/login_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="enter"
-    />
+      <Button
+        android:id="@+id/login_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="enter"
+        />
 
-        <Button
-                android:id="@+id/create_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Create new account"
+      <Button
+        android:id="@+id/create_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Create new account"
         />
 
     </LinearLayout>
 
-    </LinearLayout>
+  </LinearLayout>
 
 </android.support.design.widget.CoordinatorLayout>

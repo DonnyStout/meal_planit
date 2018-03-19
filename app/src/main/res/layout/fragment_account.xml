@@ -1,53 +1,43 @@
 <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/account_layout"
-        android:orientation="vertical"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:gravity="center_horizontal">
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:id="@+id/account_layout"
+  android:orientation="vertical"
+  android:layout_width="fill_parent"
+  android:layout_height="fill_parent"
+  android:gravity="center_horizontal">
 
 
-    <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Welcome back"
-            android:textAlignment="center"
-            android:textSize="30sp"
+  <TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="@string/welcome_text_account"
+    android:textAlignment="center"
+    android:textSize="30sp"
     />
 
-<ImageButton
-        android:id="@+id/user_image"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:layout_marginTop="6dp"
-        android:src="@drawable/user_picture"
-        />
+  <ImageButton
+    android:id="@+id/user_image"
+    android:layout_width="300dp"
+    android:layout_height="300dp"
+    android:layout_marginTop="6dp"
+    android:src="@drawable/user_picture"
+    />
 
-    <!--<TextView-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="@string/account_name"-->
-            <!--android:textAlignment="center"-->
-            <!--android:textSize="20sp"-->
-    <!--/>-->
 
-    <!--<TextView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="@string/username_text"-->
-            <!--android:textAlignment="center"-->
-            <!--android:textSize="20sp"-->
-    <!--/>-->
+  <TextView
+    android:id="@+id/replaceable_name"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:textAlignment="center"
+    android:textSize="25sp"/>
 
-    <TextView
-            android:id="@+id/replaceable_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-    <TextView
-            android:id="@+id/replaceable_user"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+  <TextView
+    android:id="@+id/replaceable_user"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:textAlignment="center"
+    android:textSize="25sp"/>
 
 
 </LinearLayout>
