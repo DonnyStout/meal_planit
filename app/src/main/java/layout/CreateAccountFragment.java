@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -81,20 +82,31 @@ public class CreateAccountFragment extends Fragment {
           new Thread(new Runnable() {
             @Override
             public void run() {
-              person = new Person();
-              personRestriction = new PersonRestriction();
-              person.setFirstName(firstNameField.getText().toString());
-              person.setLastName(lastNameField.getText().toString());
-              person.setUsername(usernameField.getText().toString());
-              person.setCaloriesPerDay((Integer) caloriesbox.getSelectedItem());
-              person.setDietId(((Diet) dietBox.getSelectedItem()).getDietId());
-              personRestriction.setRestrictionId(((Restriction) allergyBox.getSelectedItem()).getRestrictionId());
-              long personId = MealDatabase.getInstance(getActivity()).personDao().insert(person);
-              personRestriction.setPersonId(personId);
-              MealDatabase.getInstance(getActivity()).personRestrictionDao().insert(personRestriction);
-              snack = Snackbar.make(getActivity().findViewById(R.id.create_linear_layout),
-                  "Account created, please login", Snackbar.LENGTH_LONG);
-              snack.show();
+              PersonDao usernameFind = MealDatabase.getInstance(getActivity()).personDao();
+              Person personUsernameVariable = usernameFind.findUsername(usernameField.getText().toString());
+              if (personUsernameVariable != null) {
+                snack = Snackbar.make(getActivity().findViewById(R.id.create_linear_layout),
+                    "That username already exists", Snackbar.LENGTH_LONG);
+                snack.show();
+              } else {
+                person = new Person();
+                personRestriction = new PersonRestriction();
+                person.setFirstName(firstNameField.getText().toString());
+                person.setLastName(lastNameField.getText().toString());
+                person.setUsername(usernameField.getText().toString());
+                person.setCaloriesPerDay((Integer) caloriesbox.getSelectedItem());
+                person.setDietId(((Diet) dietBox.getSelectedItem()).getDietId());
+                personRestriction.setRestrictionId(
+                    ((Restriction) allergyBox.getSelectedItem()).getRestrictionId());
+                long personId = MealDatabase.getInstance(getActivity()).personDao().insert(person);
+                personRestriction.setPersonId(personId);
+                MealDatabase.getInstance(getActivity()).personRestrictionDao()
+                    .insert(personRestriction);
+                snack = Snackbar.make(getActivity().findViewById(R.id.create_linear_layout),
+                    "Account created, please login", Snackbar.LENGTH_LONG);
+                snack.show();
+                clear();
+              }
             }
           }).start();
         } else {
@@ -110,6 +122,10 @@ public class CreateAccountFragment extends Fragment {
   }
 
 
+  private void clear() {
+    FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+    fragmentTransaction.remove(this).commit();
+  }
 
 
   public void adapter() {

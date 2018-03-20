@@ -42,15 +42,15 @@ public class MainActivity extends AppCompatActivity {
           AccountFragment account = new AccountFragment();
           transaction.replace(R.id.content, account).commit();
           return true;
-        case R.id.navigation_browse:
-          transaction = getSupportFragmentManager().beginTransaction();
-          BrowseFragment browse = new BrowseFragment();
-          transaction.replace(R.id.content, browse).commit();
-          return true;
         case R.id.navigation_calendar:
           transaction = getSupportFragmentManager().beginTransaction();
           CalendarFragment calendar = new CalendarFragment();
           transaction.replace(R.id.content, calendar).commit();
+          return true;
+        case R.id.navigation_browse:
+          transaction = getSupportFragmentManager().beginTransaction();
+          BrowseFragment browse = new BrowseFragment();
+          transaction.replace(R.id.content, browse).commit();
           return true;
       }
       return false;

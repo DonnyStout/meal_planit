@@ -69,15 +69,15 @@ public class PlanFragment extends Fragment {
     lunchReady = view.findViewById(R.id.lunch_ready_text);
     dinnerReady = view.findViewById(R.id.dinner_ready_text);
     date = new Date(getArguments().getLong("plan_date"));
-//    breakfastTitle.setText(date.toString());
-//    breakfastReady.setText("yes");
-//    lunchTitle.setText("Blue berry muffins");
-//    lunchReady.setText("90");
-//    dinnerTitle.setText("Blue berry muffins");
-//    dinnerReady.setText("90");
-//    dinnerImage.setImageResource(R.drawable.ic_face_black_24dp);
-//    breakfastImage.setImageResource(R.drawable.ic_face_black_24dp);
-//    lunchImage.setImageResource(R.drawable.ic_face_black_24dp);
+    breakfastTitle.setText(date.toString());
+    breakfastReady.setText("yes");
+    lunchTitle.setText("Blue berry muffins");
+    lunchReady.setText("90");
+    dinnerTitle.setText("Blue berry muffins");
+    dinnerReady.setText("90");
+    dinnerImage.setImageResource(R.drawable.ic_face_black_24dp);
+    breakfastImage.setImageResource(R.drawable.ic_face_black_24dp);
+    lunchImage.setImageResource(R.drawable.ic_face_black_24dp);
     return view;
   }
 
