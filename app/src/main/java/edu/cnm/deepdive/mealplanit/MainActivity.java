@@ -7,11 +7,15 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.TextView;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import edu.cnm.deepdive.mealplanit.db.MealDatabase;
 import layout.AccountFragment;
 import layout.BrowseFragment;
 import layout.CalendarFragment;
 import layout.PlanFragment;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * The Main Activity for the entire application that controls the functions of the fragments for
@@ -22,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
   private TextView mTextMessage;
   private MealDatabase database;
+  private Retrofit retrofit;
 
   private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
       = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -31,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
      * in the bottom of the navigation.
      *
      * @param item            The navigation tab.
-     * @return                Whether an item has been selected.
+     * @return Whether an item has been selected.
      */
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -59,7 +64,6 @@ public class MainActivity extends AppCompatActivity {
   };
 
 
-
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -77,10 +81,10 @@ public class MainActivity extends AppCompatActivity {
 
 
   /**
-   * Getting an instance of the <code>MealDatabase</code> and if empty gets the [@link Context] and builds the database
-   * before returning the database.
+   * Getting an instance of the <code>MealDatabase</code> and if empty gets the [@link Context] and
+   * builds the database before returning the database.
    *
-   * @return                    Mealdatabase.
+   * @return Mealdatabase.
    */
   public MealDatabase getDatabase() {
     if (database == null) {
@@ -91,7 +95,19 @@ public class MainActivity extends AppCompatActivity {
   }
 
 
-
-
+  public Retrofit getRetrofit() {
+    if (retrofit == null) {
+      Gson gson = new GsonBuilder()
+          .excludeFieldsWithoutExposeAnnotation()
+          .create();
+      retrofit = new Retrofit.Builder()
+          .baseUrl(getString(R.string.base_url))
+          .addConverterFactory(GsonConverterFactory.create(gson))
+          .build();
+      return retrofit;
+    } else {
+      return retrofit;
+    }
+  }
 
 }

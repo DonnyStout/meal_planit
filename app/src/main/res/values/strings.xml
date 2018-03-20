@@ -26,5 +26,7 @@
     <string name="allergies_title">Allergies</string>
     <string name="diet_title">Diet</string>
     <string name="submit_button">Submit</string>
+  <string name="base_url">https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/mealplans/</string>
+  <string name="generate_button">Generate</string>
 
 </resources>

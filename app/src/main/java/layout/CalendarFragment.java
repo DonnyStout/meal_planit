@@ -80,7 +80,7 @@ public class CalendarFragment extends Fragment implements OnDateChangeListener {
         long planId = MealDatabase.getInstance(getActivity()).planDao().insert(planInstance);
         PersonRestriction personRestriction = MealDatabase.getInstance(getActivity())
                                                           .personRestrictionDao()
-                                                          .findPersonId(personId);
+                                                          .findByPersonId(personId);
         PlanRestriction planRestriction = new PlanRestriction();
         long restrictionId = personRestriction.getRestrictionId();
         planRestriction.setRestrictionId(restrictionId);

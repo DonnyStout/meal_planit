@@ -46,6 +46,6 @@ public interface PlanDao {
   @Insert
   long insert(Plan plan);
 
-  @Delete
-  int delete(Plan plan);
+  @Update
+  int update(Plan plan);
 }

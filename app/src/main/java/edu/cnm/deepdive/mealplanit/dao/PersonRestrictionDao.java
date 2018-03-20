@@ -10,12 +10,15 @@ import edu.cnm.deepdive.mealplanit.model.PersonRestriction;
 @Dao
 public interface PersonRestrictionDao {
 
-    @Query("SELECT * FROM personrestriction WHERE person_id LIKE :personId LIMIT 1")
-    PersonRestriction findPersonId(long personId);
+  @Query("SELECT * FROM personrestriction WHERE person_id LIKE :personId LIMIT 1")
+  PersonRestriction findByPersonId(long personId);
 
-    @Insert
-    long insert(PersonRestriction personRestriction);
+  @Query("SELECT * FROM personrestriction WHERE restriction_id LIKE :restrictionId LIMIT 1")
+  PersonRestriction findByRestrictionId(long personId);
 
-    @Update
-    int update(PersonRestriction personRestriction);
+  @Insert
+  long insert(PersonRestriction personRestriction);
+
+  @Update
+  int update(PersonRestriction personRestriction);
 }

@@ -10,15 +10,18 @@ import java.util.List;
 public interface RestrictionDao {
 
 
-    @Query("SELECT * FROM restriction")
-    List<Restriction> getAll();
+  @Query("SELECT * FROM restriction")
+  List<Restriction> getAll();
 
-    @Query("SELECT * FROM restriction WHERE allergy LIKE :allergy LIMIT 1")
-    Restriction findAllergy(String allergy);
+  @Query("SELECT * FROM restriction WHERE allergy LIKE :allergy LIMIT 1")
+  Restriction findByAllergy(String allergy);
 
-    @Insert
-    long insert(Restriction restriction);
+  @Query("SELECT * FROM restriction WHERE restriction_id LIKE :restrictionId LIMIT 1")
+  Restriction findByRestrictionId(long restrictionId);
 
-    @Update
-    int update(Restriction restriction);
+  @Insert
+  long insert(Restriction restriction);
+
+  @Update
+  int update(Restriction restriction);
 }
