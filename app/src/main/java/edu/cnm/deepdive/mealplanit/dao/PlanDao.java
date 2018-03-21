@@ -4,6 +4,7 @@ import android.arch.persistence.room.*;
 import edu.cnm.deepdive.mealplanit.model.Plan;
 
 import java.util.Date;
+import org.joda.time.LocalDate;
 
 @Dao
 public interface PlanDao {
@@ -13,7 +14,7 @@ public interface PlanDao {
   Plan getAll();
 
   @Query("SELECT * FROM plan WHERE date LIKE :date LIMIT 1")
-  Plan findDate(Date date);
+  Plan findDate(LocalDate date);
 
   @Query("SELECT * FROM plan WHERE breakfast_id LIKE :breakfastId LIMIT 1")
   Plan findBreakfastId(long breakfastId);

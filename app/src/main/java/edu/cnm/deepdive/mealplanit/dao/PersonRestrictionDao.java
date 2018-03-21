@@ -14,7 +14,7 @@ public interface PersonRestrictionDao {
   PersonRestriction findByPersonId(long personId);
 
   @Query("SELECT * FROM personrestriction WHERE restriction_id LIKE :restrictionId LIMIT 1")
-  PersonRestriction findByRestrictionId(long personId);
+  PersonRestriction findByRestrictionId(long restrictionId);
 
   @Insert
   long insert(PersonRestriction personRestriction);

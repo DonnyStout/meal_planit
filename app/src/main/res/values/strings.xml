@@ -28,5 +28,6 @@
     <string name="submit_button">Submit</string>
   <string name="base_url">https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/mealplans/</string>
   <string name="generate_button">Generate</string>
+  <string name="REGEX_FOR_EXTENSION">\\.[^.\\s]+$</string>
 
 </resources>

@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
@@ -32,9 +33,9 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Date;
 import java.util.List;
-import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import org.joda.time.LocalDate;
 import retrofit2.Retrofit;
 
 /**
@@ -43,7 +44,6 @@ import retrofit2.Retrofit;
 public class PlanFragment extends Fragment implements OnClickListener {
 
 
-  public static final String BASE_URL = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/mealplans";
 
 
   private MealDatabase database;
@@ -58,13 +58,11 @@ public class PlanFragment extends Fragment implements OnClickListener {
   private TextView breakfastTitle;
   private TextView lunchTitle;
   private TextView dinnerTitle;
-  private TextView breakfastReady;
-  private TextView lunchReady;
-  private TextView dinnerReady;
   private Button generateButton;
-  private Date date;
+  private LocalDate date;
   private Plan plan;
   private String username;
+  private Snackbar snack;
 
 
   public PlanFragment() {
@@ -88,12 +86,10 @@ public class PlanFragment extends Fragment implements OnClickListener {
     breakfastTitle = view.findViewById(R.id.breakfast_title);
     lunchTitle = view.findViewById(R.id.lunch_title);
     dinnerTitle = view.findViewById(R.id.dinner_title);
-    breakfastReady = view.findViewById(R.id.breakfast_ready_text);
-    lunchReady = view.findViewById(R.id.lunch_ready_text);
-    dinnerReady = view.findViewById(R.id.dinner_ready_text);
     generateButton = view.findViewById(R.id.generate_button);
     generateButton.setOnClickListener(this);
-    date = new Date(getArguments().getLong("plan_date"));
+    date = LocalDate.parse(getArguments().getString("plan_date"));
+    new DataBaseQuery().execute();
     return view;
   }
 
@@ -112,10 +108,16 @@ public class PlanFragment extends Fragment implements OnClickListener {
   }
 
 
+  public void retriveImages() {
+    new ImageGetter().execute(plan.getBreakfastId(), plan.getBreakfastUrl(), breakfastImage);
+    new ImageGetter().execute(plan.getLunchId(), plan.getLunchUrl(), lunchImage);
+    new ImageGetter().execute(plan.getDinnerId(), plan.getDinnerUrl(), dinnerImage);
+  }
+
+
+
   public class APICall extends AsyncTask<MealList, Object, Plan> {
 
-
-    public static final String ExtensionCatch = "\\.([^\\.]+)$";
 
     private Exception exception;
 
@@ -127,14 +129,15 @@ public class PlanFragment extends Fragment implements OnClickListener {
       Retrofit retrofit = ((MainActivity) getActivity()).getRetrofit();
       PlanService planService = retrofit.create(PlanService.class);
       Person person = database.personDao().findUsername(username);
+      plan = database.planDao().findDate(date);
       PersonRestriction restrictionId = database.personRestrictionDao().findByPersonId(person.getPersonId());
       Restriction restriction = database.restrictionDao().findByRestrictionId(restrictionId.getRestrictionId());
       Diet diet = database.dietDao().findByDietId(person.getDietId());
       try {
         MealList mealList = planService.list(
-            diet.getDietType(), restriction.getAllergy(), person.getCaloriesPerDay()).execute().body();
+            getString(R.string.food_key), diet.getDietType(), restriction.getAllergy(), person.getCaloriesPerDay(), "day").execute().body();
         List<Meal> meals = mealList.getMeals();
-        Pattern pattern = Pattern.compile(ExtensionCatch);
+        Pattern pattern = Pattern.compile(getString(R.string.REGEX_FOR_EXTENSION));
         plan.setBreakfastId(meals.get(0).getId());
         plan.setLunchId(meals.get(1).getId());
         plan.setDinnerId(meals.get(2).getId());
@@ -144,6 +147,9 @@ public class PlanFragment extends Fragment implements OnClickListener {
         Matcher breakfastMatcher = pattern.matcher(meals.get(0).getImage());
         Matcher lunchMatcher = pattern.matcher(meals.get(1).getImage());
         Matcher dinnerMatcher = pattern.matcher(meals.get(2).getImage());
+        breakfastMatcher.find();
+        lunchMatcher.find();
+        dinnerMatcher.find();
         plan.setBreakfastUrl(breakfastMatcher.group(0));
         plan.setLunchUrl(lunchMatcher.group(0));
         plan.setDinnerUrl(dinnerMatcher.group(0));
@@ -161,14 +167,16 @@ public class PlanFragment extends Fragment implements OnClickListener {
     @Override
     protected void onPostExecute(Plan plan) {
       breakfastTitle.setText(plan.getBreakfastTitle());
-//      breakfastImage.setImageBitmap();
       lunchTitle.setText(plan.getLunchTitle());
       dinnerTitle.setText(plan.getDinnerTitle());
+      retriveImages();
     }
 
     @Override
     protected void onCancelled() {
-      super.onCancelled();
+      snack = Snackbar.make(getActivity().findViewById(R.id.plan_layout),
+          "Cannot generate plan", Snackbar.LENGTH_LONG);
+      snack.show();
     }
 
   }
@@ -177,10 +185,13 @@ public class PlanFragment extends Fragment implements OnClickListener {
 
     Exception exception;
 
+    private ImageView imageView;
+
     @Override
     protected Bitmap doInBackground(Object... objects) {
+      imageView = (ImageView) objects[2];
       Plan planByDate = database.planDao().findDate(date);
-      String urlId = String.format("https://spoonacular.com/recipeImages/%s1$-90x90.%s2$", objects);
+      String urlId = String.format("https://spoonacular.com/recipeImages/%1$s-480x360%2$s", objects);
       URL url = null;
       try {
         url = new URL(urlId);
@@ -203,12 +214,35 @@ public class PlanFragment extends Fragment implements OnClickListener {
 
     @Override
     protected void onPostExecute(Bitmap bitmap) {
-      super.onPostExecute(bitmap);
+      imageView.setImageBitmap(bitmap);
+
     }
 
     @Override
     protected void onCancelled() {
-      super.onCancelled();
+      snack = Snackbar.make(getActivity().findViewById(R.id.plan_layout),
+          "Images can't be displayed", Snackbar.LENGTH_LONG);
+      snack.show();
+    }
+  }
+
+  public class DataBaseQuery extends AsyncTask<Object, Object, Plan>{
+
+    @Override
+    protected Plan doInBackground(Object... objects) {
+      getDatabase();
+      plan = database.planDao().findDate(date);
+      return plan;
+    }
+
+    @Override
+    protected void onPostExecute(Plan plan) {
+      if (plan.getBreakfastUrl() != null) {
+        breakfastTitle.setText(plan.getBreakfastTitle());
+        lunchTitle.setText(plan.getLunchTitle());
+        dinnerTitle.setText(plan.getDinnerTitle());
+        retriveImages();
+      }
     }
   }
 

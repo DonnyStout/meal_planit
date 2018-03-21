@@ -27,7 +27,7 @@ public class Plan {
 
   @NonNull
   @ColumnInfo(name = "date")
-  private Date date;
+  private String date;
 
   @ColumnInfo(name = "breakfast_id")
   private long breakfastId;
@@ -70,11 +70,12 @@ public class Plan {
     this.planId = planId;
   }
 
-  public Date getDate() {
+  @NonNull
+  public String getDate() {
     return date;
   }
 
-  public void setDate(Date date) {
+  public void setDate(@NonNull String date) {
     this.date = date;
   }
 

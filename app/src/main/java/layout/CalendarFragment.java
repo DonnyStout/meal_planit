@@ -19,6 +19,7 @@ import edu.cnm.deepdive.mealplanit.model.Plan;
 import edu.cnm.deepdive.mealplanit.model.PlanRestriction;
 import java.util.Calendar;
 import java.util.Date;
+import org.joda.time.LocalDate;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -50,30 +51,23 @@ public class CalendarFragment extends Fragment implements OnDateChangeListener {
 
   @Override
   public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
-    Calendar calendar = Calendar.getInstance();
-    calendar.set(year, month, dayOfMonth);
-    calendar.clear(Calendar.HOUR_OF_DAY);
-    calendar.clear(Calendar.MINUTE);
-    calendar.clear(Calendar.SECOND);
-    calendar.clear(Calendar.MILLISECOND);
-    calendar.clear(Calendar.ZONE_OFFSET);
-    calendar.clear(Calendar.DST_OFFSET);
-    new PlanInstance().execute(calendar.getTime());
+    LocalDate localDate = new LocalDate(year, month, dayOfMonth);
+    new PlanInstance().execute(localDate);
   }
 
-  private class PlanInstance extends AsyncTask<Date, Object, Plan> {
+  private class PlanInstance extends AsyncTask<LocalDate, Object, Plan> {
 
     private Plan planInstance;
 
     @Override
-    protected Plan doInBackground(Date... date) {
+    protected Plan doInBackground(LocalDate... date) {
       planInstance = MealDatabase.getInstance(getActivity()).planDao().findDate(date[0]);
       if (planInstance == null) {
         planInstance = new Plan();
         Person person = MealDatabase.getInstance(getActivity()).personDao().findUsername(username);
         long dietId = person.getDietId();
         long personId = person.getPersonId();
-        planInstance.setDate(date[0]);
+        planInstance.setDate(date[0].toString());
         planInstance.setPersonId(personId);
         planInstance.setDietId(dietId);
 //        MealDatabase.getInstance(getActivity()).planDao().insert(personId)
@@ -93,7 +87,7 @@ public class CalendarFragment extends Fragment implements OnDateChangeListener {
     @Override
     protected void onPostExecute(Plan plan) {
       date = new Bundle();
-      date.putLong("plan_date", plan.getDate().getTime());
+      date.putString("plan_date", plan.getDate().toString());
       android.support.v4.app.FragmentTransaction transaction = getFragmentManager()
           .beginTransaction();
       PlanFragment planFragment = new PlanFragment();

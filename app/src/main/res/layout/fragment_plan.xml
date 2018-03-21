@@ -32,24 +32,17 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginRight="16dp"
+        android:layout_centerHorizontal="true"
         />
 
       <TextView
         android:id="@+id/breakfast_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toEndOf="@+id/breakfast_photo"
+        android:layout_below="@+id/breakfast_photo"
+        android:layout_centerHorizontal="true"
         android:layout_alignParentTop="true"
         android:textSize="20sp"
-        />
-
-      <TextView
-        android:id="@+id/breakfast_ready_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toEndOf="@+id/breakfast_photo"
-        android:layout_below="@+id/breakfast_title"
-        android:textSize="15sp"
         />
 
     </RelativeLayout>
@@ -75,6 +68,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
         android:layout_marginRight="16dp"
         />
 
@@ -82,19 +76,11 @@
         android:id="@+id/lunch_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toEndOf="@+id/lunch_photo"
+        android:layout_below="@+id/lunch_photo"
         android:layout_alignParentTop="true"
-        android:textSize="20sp"
-        />
+        android:layout_centerHorizontal="true"
+        android:textSize="20sp"/>
 
-      <TextView
-        android:id="@+id/lunch_ready_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toEndOf="@+id/lunch_photo"
-        android:layout_below="@+id/lunch_title"
-        android:textSize="15sp"
-        />
 
     </RelativeLayout>
 
@@ -120,6 +106,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
         android:layout_marginRight="16dp"
         />
 
@@ -127,18 +114,10 @@
         android:id="@+id/dinner_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toEndOf="@+id/dinner_photo"
+        android:layout_below="@+id/dinner_photo"
         android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
         android:textSize="20sp"
-        />
-
-      <TextView
-        android:id="@+id/dinner_ready_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toEndOf="@+id/dinner_photo"
-        android:layout_below="@+id/dinner_title"
-        android:textSize="15sp"
         />
 
     </RelativeLayout>

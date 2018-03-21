@@ -20,7 +20,7 @@ public interface DietDao {
   @Query("SELECT * FROM diet WHERE diet_type LIKE :dietType LIMIT 1")
   Diet findDietType(String dietType);
 
-  @Query("SELECT * FROM diet_id WHERE diet_type LIKE :dietId LIMIT 1")
+  @Query("SELECT * FROM diet WHERE diet_id LIKE :dietId LIMIT 1")
   Diet findByDietId(long dietId);
 
   // Insert object for the Diet model
