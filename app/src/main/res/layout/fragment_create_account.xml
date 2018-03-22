@@ -16,65 +16,70 @@
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:text="@string/first_name_title"
-      android:paddingStart="15dp"/>
+      android:paddingStart="25dp"/>
 
     <EditText
       android:id="@+id/first_name_field"
-      android:layout_width="100dp"
-      android:layout_height="45dp"/>
+      android:layout_width="200dp"
+      android:layout_height="55dp"/>
 
     <TextView
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:text="@string/last_name_title"
-      android:paddingStart="15dp"/>
+      android:paddingStart="25dp"/>
 
     <EditText
       android:id="@+id/last_name_field"
-      android:layout_width="100dp"
-      android:layout_height="45dp"/>
+      android:layout_width="200dp"
+      android:layout_height="55dp"/>
 
     <TextView
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:text="@string/username_title"
-      android:paddingStart="15dp"/>
+      android:paddingStart="25dp"/>
 
     <EditText
       android:id="@+id/username_set_field"
-      android:layout_width="100dp"
-      android:layout_height="45dp"/>
+      android:layout_width="200dp"
+      android:layout_height="55dp"/>
 
     <TextView
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:text="@string/target_daily_calories_title"/>
+      android:text="@string/target_daily_calories_title"
+      android:paddingStart="25dp"/>
 
     <Spinner
       android:id="@+id/calories_spinner"
-      android:layout_width="100dp"
-      android:layout_height="45dp"/>
+      android:layout_width="200dp"
+      android:layout_height="55dp"
+      android:paddingStart="25dp"/>
 
     <TextView
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:text="@string/allergies_title"
-      android:paddingStart="15dp"/>
+      android:paddingStart="25dp"/>
 
     <Spinner
       android:id="@+id/allergy_box"
-      android:layout_width="100dp"
-      android:layout_height="45dp"/>
+      android:layout_width="200dp"
+      android:layout_height="55dp"
+      android:paddingStart="25dp"/>
 
     <TextView
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:text="@string/diet_title"/>
+      android:text="@string/diet_title"
+      android:paddingStart="25dp"/>
 
     <Spinner
       android:id="@+id/diet_box"
-      android:layout_width="100dp"
-      android:layout_height="45dp"/>
+      android:layout_width="200dp"
+      android:layout_height="55dp"
+      android:paddingStart="25dp"/>
 
     <Button
       android:id="@+id/submit_button"

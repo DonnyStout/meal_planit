@@ -29,5 +29,10 @@
   <string name="base_url">https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/mealplans/</string>
   <string name="generate_button">Generate</string>
   <string name="REGEX_FOR_EXTENSION">\\.[^.\\s]+$</string>
+  <string name="change_picture_button_text">change picture</string>
+  <string name="change_username_text">Change Username</string>
+  <string name="change_calories_text">Change Calories</string>
+  <string name="change_diet_text">Change Diet</string>
+  <string name="change_allergies_text">Change Allergies</string>
 
 </resources>

@@ -1,47 +1,46 @@
 <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/filter_list"
-        android:orientation="vertical"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:id="@+id/filter_list"
+  android:orientation="vertical"
+  android:layout_width="fill_parent"
+  android:layout_height="fill_parent">
 
 
-    <Button
-            android:id="@+id/image_filter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="change picture"/>
+  <Button
+    android:id="@+id/image_button"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/change_picture_button_text"/>
 
-    <TextView
-            android:id="@+id/weight_filter"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="weight"
-            android:textSize="20sp"
+  <TextView
+    android:id="@+id/username_change"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="@string/change_username_text"
+    android:textSize="20sp"/>
+
+  <TextView
+    android:id="@+id/change_calories"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="@string/change_calories_text"
+    android:textSize="20sp"
     />
 
-    <TextView
-            android:id="@+id/budget_filter"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="budget"
-            android:textSize="20sp"
+  <TextView
+    android:id="@+id/change_diet"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="@string/change_diet_text"
+    android:textSize="20sp"
     />
 
-    <TextView
-            android:id="@+id/family_filter"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="family size"
-            android:textSize="20sp"
-    />
-
-    <TextView
-            android:id="@+id/calories_filter"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="calories"
-            android:textSize="20sp"
+  <TextView
+    android:id="@+id/change_allergies"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="@string/change_allergies_text"
+    android:textSize="20sp"
     />
 
 

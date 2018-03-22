@@ -86,7 +86,7 @@ public class Person {
 
     @Override
     public String toString() {
-        return personId+ " " + firstName + " " + lastName + " " + username + " " + caloriesPerDay + " " + dietId;
+        return username;
     }
 
 }
