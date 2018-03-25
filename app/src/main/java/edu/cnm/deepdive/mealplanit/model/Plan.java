@@ -30,7 +30,7 @@ public class Plan {
   private String date;
 
   @ColumnInfo(name = "breakfast_id")
-  private long breakfastId;
+  private Long breakfastId;
 
   @ColumnInfo(name = "breakfast_title")
   private String breakfastTitle;
@@ -39,7 +39,7 @@ public class Plan {
   private String breakfastUrl;
 
   @ColumnInfo(name = "lunch_id")
-  private long lunchId;
+  private Long lunchId;
 
   @ColumnInfo(name = "lunch_title")
   private String lunchTitle;
@@ -48,7 +48,7 @@ public class Plan {
   private String lunchUrl;
 
   @ColumnInfo(name = "dinner_id")
-  private long dinnerId;
+  private Long dinnerId;
 
   @ColumnInfo(name = "dinner_title")
   private String dinnerTitle;
@@ -79,11 +79,11 @@ public class Plan {
     this.date = date;
   }
 
-  public long getBreakfastId() {
+  public Long getBreakfastId() {
     return breakfastId;
   }
 
-  public void setBreakfastId(long breakfastId) {
+  public void setBreakfastId(Long breakfastId) {
     this.breakfastId = breakfastId;
   }
 
@@ -103,11 +103,11 @@ public class Plan {
     this.breakfastUrl = breakfastUrl;
   }
 
-  public long getLunchId() {
+  public Long getLunchId() {
     return lunchId;
   }
 
-  public void setLunchId(long lunchId) {
+  public void setLunchId(Long lunchId) {
     this.lunchId = lunchId;
   }
 
@@ -127,11 +127,11 @@ public class Plan {
     this.lunchUrl = lunchUrl;
   }
 
-  public long getDinnerId() {
+  public Long getDinnerId() {
     return dinnerId;
   }
 
-  public void setDinnerId(long dinnerId) {
+  public void setDinnerId(Long dinnerId) {
     this.dinnerId = dinnerId;
   }
 

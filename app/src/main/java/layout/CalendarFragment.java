@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 
 import android.widget.CalendarView;
 import android.widget.CalendarView.OnDateChangeListener;
+import edu.cnm.deepdive.mealplanit.MainActivity;
 import edu.cnm.deepdive.mealplanit.R;
 import edu.cnm.deepdive.mealplanit.db.MealDatabase;
 import edu.cnm.deepdive.mealplanit.model.Person;
@@ -27,8 +28,10 @@ import org.joda.time.LocalDate;
 public class CalendarFragment extends Fragment implements OnDateChangeListener {
 
 
+  private MealDatabase database;
   private String username;
-  public Bundle date;
+  private Bundle date;
+  private Person person;
 
   public CalendarFragment() {
     // Required empty public constructor
@@ -55,23 +58,28 @@ public class CalendarFragment extends Fragment implements OnDateChangeListener {
     new PlanInstance().execute(localDate);
   }
 
+  private MealDatabase getDatabase() {
+    database = ((MainActivity) getActivity()).getDatabase();
+    return database;
+  }
+
   private class PlanInstance extends AsyncTask<LocalDate, Object, Plan> {
 
     private Plan planInstance;
 
     @Override
     protected Plan doInBackground(LocalDate... date) {
-      planInstance = MealDatabase.getInstance(getActivity()).planDao().findDate(date[0]);
+      getDatabase();
+      person = database.personDao().findUsername(username);
+      planInstance =database.planDao().findByDateAndPersonId(date[0], person.getPersonId());
       if (planInstance == null) {
         planInstance = new Plan();
-        Person person = MealDatabase.getInstance(getActivity()).personDao().findUsername(username);
         long dietId = person.getDietId();
         long personId = person.getPersonId();
         planInstance.setDate(date[0].toString());
         planInstance.setPersonId(personId);
         planInstance.setDietId(dietId);
-//        MealDatabase.getInstance(getActivity()).planDao().insert(personId)
-        long planId = MealDatabase.getInstance(getActivity()).planDao().insert(planInstance);
+        long planId = database.planDao().insert(planInstance);
         PersonRestriction personRestriction = MealDatabase.getInstance(getActivity())
                                                           .personRestrictionDao()
                                                           .findByPersonId(personId);

@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "23710424685e77a161cb336c1c677d47",
+    "identityHash": "7b7e78a93a351bc9154aee641bae9941",
     "entities": [
       {
         "tableName": "Diet",
@@ -103,7 +103,7 @@
       },
       {
         "tableName": "Plan",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`plan_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `date` TEXT NOT NULL, `breakfast_id` INTEGER NOT NULL, `breakfast_title` TEXT, `breakfast_url` TEXT, `lunch_id` INTEGER NOT NULL, `lunch_title` TEXT, `lunch_url` TEXT, `dinner_id` INTEGER NOT NULL, `dinner_title` TEXT, `dinner_url` TEXT, `person_id` INTEGER NOT NULL, `diet_id` INTEGER, FOREIGN KEY(`person_id`) REFERENCES `Person`(`person_id`) ON UPDATE NO ACTION ON DELETE CASCADE , FOREIGN KEY(`diet_id`) REFERENCES `Diet`(`diet_id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`plan_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `date` TEXT NOT NULL, `breakfast_id` INTEGER, `breakfast_title` TEXT, `breakfast_url` TEXT, `lunch_id` INTEGER, `lunch_title` TEXT, `lunch_url` TEXT, `dinner_id` INTEGER, `dinner_title` TEXT, `dinner_url` TEXT, `person_id` INTEGER NOT NULL, `diet_id` INTEGER, FOREIGN KEY(`person_id`) REFERENCES `Person`(`person_id`) ON UPDATE NO ACTION ON DELETE CASCADE , FOREIGN KEY(`diet_id`) REFERENCES `Diet`(`diet_id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
         "fields": [
           {
             "fieldPath": "planId",
@@ -121,7 +121,7 @@
             "fieldPath": "breakfastId",
             "columnName": "breakfast_id",
             "affinity": "INTEGER",
-            "notNull": true
+            "notNull": false
           },
           {
             "fieldPath": "breakfastTitle",
@@ -139,7 +139,7 @@
             "fieldPath": "lunchId",
             "columnName": "lunch_id",
             "affinity": "INTEGER",
-            "notNull": true
+            "notNull": false
           },
           {
             "fieldPath": "lunchTitle",
@@ -157,7 +157,7 @@
             "fieldPath": "dinnerId",
             "columnName": "dinner_id",
             "affinity": "INTEGER",
-            "notNull": true
+            "notNull": false
           },
           {
             "fieldPath": "dinnerTitle",
@@ -396,7 +396,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"23710424685e77a161cb336c1c677d47\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"7b7e78a93a351bc9154aee641bae9941\")"
     ]
   }
 }

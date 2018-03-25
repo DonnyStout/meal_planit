@@ -13,7 +13,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -31,7 +30,6 @@ import edu.cnm.deepdive.mealplanit.servicemodel.MealList.Meal;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Date;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -128,8 +126,8 @@ public class PlanFragment extends Fragment implements OnClickListener {
       getDatabase();
       Retrofit retrofit = ((MainActivity) getActivity()).getRetrofit();
       PlanService planService = retrofit.create(PlanService.class);
-      Person person = database.personDao().findUsername(username);
-      plan = database.planDao().findDate(date);
+      person = database.personDao().findUsername(username);
+      plan = database.planDao().findByDateAndPersonId(date, person.getPersonId());
       PersonRestriction restrictionId = database.personRestrictionDao().findByPersonId(person.getPersonId());
       Restriction restriction = database.restrictionDao().findByRestrictionId(restrictionId.getRestrictionId());
       Diet diet = database.dietDao().findByDietId(person.getDietId());
@@ -190,7 +188,7 @@ public class PlanFragment extends Fragment implements OnClickListener {
     @Override
     protected Bitmap doInBackground(Object... objects) {
       imageView = (ImageView) objects[2];
-      Plan planByDate = database.planDao().findDate(date);
+      Plan planByDate = database.planDao().findByDateAndPersonId(date, person.getPersonId());
       String urlId = String.format("https://spoonacular.com/recipeImages/%1$s-480x360%2$s", objects);
       URL url = null;
       try {
@@ -231,7 +229,8 @@ public class PlanFragment extends Fragment implements OnClickListener {
     @Override
     protected Plan doInBackground(Object... objects) {
       getDatabase();
-      plan = database.planDao().findDate(date);
+      person = database.personDao().findUsername(username);
+      plan = database.planDao().findByDateAndPersonId(date, person.getPersonId());
       return plan;
     }
 

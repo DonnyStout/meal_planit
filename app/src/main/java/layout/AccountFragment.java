@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +31,7 @@ public class AccountFragment extends Fragment implements View.OnClickListener {
   private String username;
   private Person person;
   private TextView name;
+  private FrameLayout calendarFrame;
 
 
   /**
@@ -53,27 +55,10 @@ public class AccountFragment extends Fragment implements View.OnClickListener {
     imageButton.setOnClickListener(this);
     TextView user = view.findViewById(R.id.replaceable_user);
     user.setText(username);
+    FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+    CalendarFragment calendarFragment = new CalendarFragment();
+    fragmentTransaction.add(R.id.calendar_frame, calendarFragment).commit();
     new FindUser().execute();
-
-//        new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-//        Person person = new Person();
-//        person.setFirstName("Bob");
-//        person.setLastName("Star");
-//        person.setUsername("star*labs");
-//        ((MainActivity)getActivity()).getDatabase().personDao().insert(person);
-//
-////                Person personList = ((MainActivity)getActivity()).getDatabase().personDao().findUsername();
-////                final ListAdapter adapter = new ArrayAdapter<Person>(getActivity(), android.R.layout.simple_list_item_1, personList);
-////                getActivity().runOnUiThread(new Runnable() {
-////                    @Override
-////                    public void run() {
-////                        ((List<Person>) view).setAdapter(adapter);
-////                    }
-////                });
-//            }
-//        }).start();
     return view;
   }
 

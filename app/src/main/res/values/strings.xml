@@ -34,5 +34,7 @@
   <string name="change_calories_text">Change Calories</string>
   <string name="change_diet_text">Change Diet</string>
   <string name="change_allergies_text">Change Allergies</string>
+  <string name="home_toolbar_button">Home</string>
+  <string name="settings_toolbar_menu">Settings</string>
 
 </resources>

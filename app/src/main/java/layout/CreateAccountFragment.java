@@ -12,6 +12,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 
 import android.widget.*;
+import edu.cnm.deepdive.mealplanit.LoginActivity;
 import edu.cnm.deepdive.mealplanit.dao.DietDao;
 import edu.cnm.deepdive.mealplanit.dao.PersonDao;
 import edu.cnm.deepdive.mealplanit.dao.PlanRestrictionDao;
@@ -105,6 +106,7 @@ public class CreateAccountFragment extends Fragment {
                 snack = Snackbar.make(getActivity().findViewById(R.id.create_linear_layout),
                     "Account created, please login", Snackbar.LENGTH_LONG);
                 snack.show();
+                ((LoginActivity) getActivity()).update();
                 clear();
               }
             }

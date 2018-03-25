@@ -24,7 +24,7 @@ public class MealList {
 
     @SerializedName("id")
     @Expose
-    private Integer id;
+    private Long id;
 
     @SerializedName("title")
     @Expose
@@ -42,11 +42,11 @@ public class MealList {
     @Expose
     private List<String> imageUrls = null;
 
-    public Integer getId() {
+    public Long getId() {
       return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
       this.id = id;
     }
 
