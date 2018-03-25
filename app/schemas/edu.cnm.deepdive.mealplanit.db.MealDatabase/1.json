@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "7b7e78a93a351bc9154aee641bae9941",
+    "identityHash": "1310657209dfdb7ed6134daf66678eeb",
     "entities": [
       {
         "tableName": "Diet",
@@ -32,7 +32,7 @@
       },
       {
         "tableName": "Person",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`person_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `first_name` TEXT NOT NULL COLLATE NOCASE, `last_name` TEXT NOT NULL COLLATE NOCASE, `username` TEXT NOT NULL COLLATE NOCASE, `calories_per_day` INTEGER NOT NULL, `diet_id` INTEGER NOT NULL, FOREIGN KEY(`diet_id`) REFERENCES `Diet`(`diet_id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`person_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `first_name` TEXT NOT NULL COLLATE NOCASE, `last_name` TEXT NOT NULL COLLATE NOCASE, `username` TEXT NOT NULL COLLATE NOCASE, `calories_per_day` INTEGER NOT NULL, `image_uri` TEXT, `diet_id` INTEGER NOT NULL, FOREIGN KEY(`diet_id`) REFERENCES `Diet`(`diet_id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
         "fields": [
           {
             "fieldPath": "personId",
@@ -63,6 +63,12 @@
             "columnName": "calories_per_day",
             "affinity": "INTEGER",
             "notNull": true
+          },
+          {
+            "fieldPath": "imageUri",
+            "columnName": "image_uri",
+            "affinity": "TEXT",
+            "notNull": false
           },
           {
             "fieldPath": "dietId",
@@ -396,7 +402,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"7b7e78a93a351bc9154aee641bae9941\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"1310657209dfdb7ed6134daf66678eeb\")"
     ]
   }
 }

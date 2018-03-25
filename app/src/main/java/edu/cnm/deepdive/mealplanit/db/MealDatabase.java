@@ -10,6 +10,7 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.util.Log;
 import edu.cnm.deepdive.mealplanit.converter.DateTypeConverter;
+import edu.cnm.deepdive.mealplanit.converter.ImageConverter;
 import edu.cnm.deepdive.mealplanit.dao.DietDao;
 import edu.cnm.deepdive.mealplanit.dao.PersonDao;
 import edu.cnm.deepdive.mealplanit.dao.PersonRestrictionDao;
@@ -34,7 +35,7 @@ import java.util.concurrent.Executors;
  */
 @Database(entities = {Diet.class, Person.class, Plan.class, Restriction.class,
 PersonRestriction.class, PlanRestriction.class}, version = 1, exportSchema = true)
-@TypeConverters({DateTypeConverter.class})
+@TypeConverters({DateTypeConverter.class, ImageConverter.class})
 public abstract class MealDatabase extends RoomDatabase {
 
   // A field assigning MealDatabase as a variable

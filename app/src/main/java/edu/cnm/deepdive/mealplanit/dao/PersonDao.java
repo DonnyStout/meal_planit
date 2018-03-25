@@ -35,6 +35,9 @@ public interface PersonDao {
   @Query("SELECT * From person WHERE calories_per_day LIKE :caloriesPerDay LIMIT 1")
   Person findCaloriesPerDay(long caloriesPerDay);
 
+  @Query("SELECT * FROM person WHERE image_uri LIKE :imageUri LIMIT 1")
+  Person findByImageUri(String imageUri);
+
   @Insert
   long insert(Person person);
 
