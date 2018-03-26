@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "1310657209dfdb7ed6134daf66678eeb",
+    "identityHash": "f15f9a3e66f80b35472f5bdfdb8edea5",
     "entities": [
       {
         "tableName": "Diet",
@@ -267,8 +267,14 @@
       },
       {
         "tableName": "PersonRestriction",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`person_id` INTEGER NOT NULL, `restriction_id` INTEGER NOT NULL, PRIMARY KEY(`person_id`, `restriction_id`), FOREIGN KEY(`person_id`) REFERENCES `Person`(`person_id`) ON UPDATE NO ACTION ON DELETE CASCADE , FOREIGN KEY(`restriction_id`) REFERENCES `Restriction`(`restriction_id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`personrestriction_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `person_id` INTEGER NOT NULL, `restriction_id` INTEGER NOT NULL, FOREIGN KEY(`person_id`) REFERENCES `Person`(`person_id`) ON UPDATE NO ACTION ON DELETE CASCADE , FOREIGN KEY(`restriction_id`) REFERENCES `Restriction`(`restriction_id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
         "fields": [
+          {
+            "fieldPath": "personRestrictionId",
+            "columnName": "personrestriction_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
           {
             "fieldPath": "personId",
             "columnName": "person_id",
@@ -284,10 +290,9 @@
         ],
         "primaryKey": {
           "columnNames": [
-            "person_id",
-            "restriction_id"
+            "personrestriction_id"
           ],
-          "autoGenerate": false
+          "autoGenerate": true
         },
         "indices": [
           {
@@ -402,7 +407,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"1310657209dfdb7ed6134daf66678eeb\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"f15f9a3e66f80b35472f5bdfdb8edea5\")"
     ]
   }
 }

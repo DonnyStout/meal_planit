@@ -19,6 +19,8 @@ public interface PersonDao {
   @Query("SELECT * FROM person")
   List<Person> getAll();
 
+  @Query("SELECT * FROM person WHERE person_id LIKE :personId LIMIT 1")
+  Person findByPersonId(Long personId);
 
   @Query("SELECT * FROM person WHERE first_name LIKE :firstName LIMIT 1")
   Person findFirstName(String firstName);

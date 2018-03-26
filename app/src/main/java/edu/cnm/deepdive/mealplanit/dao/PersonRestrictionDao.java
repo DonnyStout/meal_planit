@@ -6,6 +6,7 @@ import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Update;
 import edu.cnm.deepdive.mealplanit.model.PersonRestriction;
+import java.util.List;
 
 @Dao
 public interface PersonRestrictionDao {

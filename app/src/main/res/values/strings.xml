@@ -30,11 +30,12 @@
   <string name="generate_button">Generate</string>
   <string name="REGEX_FOR_EXTENSION">\\.[^.\\s]+$</string>
   <string name="change_picture_button_text">change picture</string>
-  <string name="change_username_text">Change Username</string>
+  <string name="change_username_text">Confirm Username or Enter New Username</string>
   <string name="change_calories_text">Change Calories</string>
   <string name="change_diet_text">Change Diet</string>
   <string name="change_allergies_text">Change Allergies</string>
   <string name="home_toolbar_button">Home</string>
   <string name="settings_toolbar_menu">Settings</string>
+  <string name="update_settings_button">Update Settings</string>
 
 </resources>

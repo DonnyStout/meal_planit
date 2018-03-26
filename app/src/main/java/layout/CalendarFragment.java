@@ -18,8 +18,6 @@ import edu.cnm.deepdive.mealplanit.model.Person;
 import edu.cnm.deepdive.mealplanit.model.PersonRestriction;
 import edu.cnm.deepdive.mealplanit.model.Plan;
 import edu.cnm.deepdive.mealplanit.model.PlanRestriction;
-import java.util.Calendar;
-import java.util.Date;
 import org.joda.time.LocalDate;
 
 /**
@@ -29,7 +27,7 @@ public class CalendarFragment extends Fragment implements OnDateChangeListener {
 
 
   private MealDatabase database;
-  private String username;
+  private Long userId;
   private Bundle date;
   private Person person;
 
@@ -43,8 +41,8 @@ public class CalendarFragment extends Fragment implements OnDateChangeListener {
       Bundle savedInstanceState) {
     // Inflate the layout for this fragment
     View view = inflater.inflate(R.layout.fragment_calendar, container, false);
-    username = getActivity().getSharedPreferences("user", Context.MODE_PRIVATE)
-        .getString("username", null);
+    userId = getActivity().getSharedPreferences("user_id", Context.MODE_PRIVATE)
+        .getLong("user_id", -1);
 
     CalendarView cv = view.findViewById(R.id.calendar_view);
     cv.setOnDateChangeListener(this);
@@ -70,7 +68,7 @@ public class CalendarFragment extends Fragment implements OnDateChangeListener {
     @Override
     protected Plan doInBackground(LocalDate... date) {
       getDatabase();
-      person = database.personDao().findUsername(username);
+      person = database.personDao().findByPersonId(userId);
       planInstance =database.planDao().findByDateAndPersonId(date[0], person.getPersonId());
       if (planInstance == null) {
         planInstance = new Plan();
@@ -100,7 +98,7 @@ public class CalendarFragment extends Fragment implements OnDateChangeListener {
           .beginTransaction();
       PlanFragment planFragment = new PlanFragment();
       planFragment.setArguments(date);
-      transaction.replace(R.id.content, planFragment).commit();
+      transaction.replace(R.id.content, planFragment).addToBackStack("plan").commit();
     }
   }
 }

@@ -8,6 +8,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -59,8 +60,9 @@ public class PlanFragment extends Fragment implements OnClickListener {
   private Button generateButton;
   private LocalDate date;
   private Plan plan;
-  private String username;
+  private Long userId;
   private Snackbar snack;
+  private Bundle bundle;
 
 
   public PlanFragment() {
@@ -73,8 +75,8 @@ public class PlanFragment extends Fragment implements OnClickListener {
       Bundle savedInstanceState) {
     // Inflate the layout for this fragment
     View view = inflater.inflate(R.layout.fragment_plan, container, false);
-    username = getActivity().getSharedPreferences("user", Context.MODE_PRIVATE)
-                            .getString("username", null);
+    userId = getActivity().getSharedPreferences("user_id", Context.MODE_PRIVATE)
+                            .getLong("user_id", -1);
     breakfastCardView = view.findViewById(R.id.breakfast_card_view);
     lunchCardView = view.findViewById(R.id.lunch_card_view);
     dinnerCardView = view.findViewById(R.id.dinner_card_view);
@@ -100,8 +102,23 @@ public class PlanFragment extends Fragment implements OnClickListener {
 
   @Override
   public void onClick(View v) {
+    bundle = new Bundle();
+    FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+    BrowseFragment browseFragment = new BrowseFragment();
     if (generateButton.getId() == v.getId()) {
       new APICall().execute();
+    } else if (breakfastCardView.getId() == v.getId()) {
+      bundle.putString("title", breakfastTitle.toString());
+      browseFragment.setArguments(bundle);
+      fragmentTransaction.replace(R.id.content, browseFragment).addToBackStack("browse").commit();
+    } else if (lunchCardView.getId() == v.getId()) {
+      bundle.putString("title", lunchTitle.toString());
+      browseFragment.setArguments(bundle);
+      fragmentTransaction.replace(R.id.content, browseFragment).addToBackStack("browse").commit();
+    } else if (dinnerCardView.getId() == v.getId()) {
+      bundle.putString("title", dinnerTitle.toString());
+      browseFragment.setArguments(bundle);
+      fragmentTransaction.replace(R.id.content, browseFragment).addToBackStack("browse").commit();
     }
   }
 
@@ -111,6 +128,7 @@ public class PlanFragment extends Fragment implements OnClickListener {
     new ImageGetter().execute(plan.getLunchId(), plan.getLunchUrl(), lunchImage);
     new ImageGetter().execute(plan.getDinnerId(), plan.getDinnerUrl(), dinnerImage);
   }
+
 
 
 
@@ -126,10 +144,10 @@ public class PlanFragment extends Fragment implements OnClickListener {
       getDatabase();
       Retrofit retrofit = ((MainActivity) getActivity()).getRetrofit();
       PlanService planService = retrofit.create(PlanService.class);
-      person = database.personDao().findUsername(username);
+      person = database.personDao().findByPersonId(userId);
       plan = database.planDao().findByDateAndPersonId(date, person.getPersonId());
-      PersonRestriction restrictionId = database.personRestrictionDao().findByPersonId(person.getPersonId());
-      Restriction restriction = database.restrictionDao().findByRestrictionId(restrictionId.getRestrictionId());
+      PersonRestriction restrictionIdList = database.personRestrictionDao().findByPersonId(person.getPersonId());
+      Restriction restriction = database.restrictionDao().findByRestrictionId(restrictionIdList.getRestrictionId());
       Diet diet = database.dietDao().findByDietId(person.getDietId());
       try {
         MealList mealList = planService.list(
@@ -229,7 +247,7 @@ public class PlanFragment extends Fragment implements OnClickListener {
     @Override
     protected Plan doInBackground(Object... objects) {
       getDatabase();
-      person = database.personDao().findUsername(username);
+      person = database.personDao().findByPersonId(userId);
       plan = database.planDao().findByDateAndPersonId(date, person.getPersonId());
       return plan;
     }

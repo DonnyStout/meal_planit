@@ -19,21 +19,36 @@
     android:text="@string/change_username_text"
     android:textSize="20sp"/>
 
+  <EditText
+    android:id="@+id/username_change_field"
+    android:layout_width="200dp"
+    android:layout_height="55dp"/>
+
   <TextView
     android:id="@+id/change_calories"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:text="@string/change_calories_text"
-    android:textSize="20sp"
-    />
+    android:textSize="20sp"/>
+
+  <Spinner
+    android:id="@+id/calories_spinner_settings"
+    android:layout_width="200dp"
+    android:layout_height="55dp"
+    android:paddingStart="25dp"/>
 
   <TextView
     android:id="@+id/change_diet"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:text="@string/change_diet_text"
-    android:textSize="20sp"
-    />
+    android:textSize="20sp"/>
+
+  <Spinner
+    android:id="@+id/diet_box_settings"
+    android:layout_width="200dp"
+    android:layout_height="55dp"
+    android:paddingStart="25dp"/>
 
   <TextView
     android:id="@+id/change_allergies"
@@ -43,6 +58,17 @@
     android:textSize="20sp"
     />
 
+  <Spinner
+    android:id="@+id/allergy_box_settings"
+    android:layout_width="200dp"
+    android:layout_height="55dp"
+    android:paddingStart="25dp"/>
+
+  <Button
+    android:id="@+id/update_button"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/update_settings_button"/>
 
 
 </LinearLayout>

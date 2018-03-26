@@ -36,6 +36,6 @@ public class Diet {
 
     @Override
     public String toString() {
-        return dietId + " " + dietType;
+        return dietType;
     }
 }

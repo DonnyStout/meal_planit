@@ -60,12 +60,12 @@ public class MainActivity extends AppCompatActivity {
       case R.id.home_button:
         android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         AccountFragment accountFragment = new AccountFragment();
-        fragmentTransaction.replace(R.id.content, accountFragment).commit();
+        fragmentTransaction.replace(R.id.content, accountFragment).addToBackStack("account").commit();
         break;
       case R.id.settings_button:
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
         FilterFragment filterFragment = new FilterFragment();
-        fragmentTransaction.replace(R.id.content, filterFragment).commit();
+        fragmentTransaction.replace(R.id.content, filterFragment).addToBackStack("filter").commit();
         break;
       default:
         return super.onOptionsItemSelected(item);

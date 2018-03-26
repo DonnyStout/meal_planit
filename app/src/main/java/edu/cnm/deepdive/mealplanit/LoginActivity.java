@@ -101,8 +101,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         if (enter.getId() == v.getId() && person != null) {
           Intent intent = new Intent(LoginActivity.this, MainActivity.class);
           bundle = new Bundle();
-          Editor editor = getSharedPreferences("user", MODE_PRIVATE).edit();
-          editor.putString("username", person.getUsername());
+          Editor editor = getSharedPreferences("user_id", MODE_PRIVATE).edit();
+          editor.putLong("user_id", person.getPersonId());
           editor.apply();
           intent.putExtras(bundle);
           startActivity(intent);
