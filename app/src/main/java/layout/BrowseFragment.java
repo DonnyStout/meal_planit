@@ -8,6 +8,7 @@ import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.TextView;
 import com.google.gson.Gson;
@@ -44,6 +45,8 @@ public class BrowseFragment extends Fragment {
     foodId = getArguments().getLong("food_id");
     recipeCard = view.findViewById(R.id.browse_card_view);
     recipeText = view.findViewById(R.id.recipe_text);
+    WebSettings webSettings = recipeText.getSettings();
+    webSettings.setTextZoom(webSettings.getTextZoom() + 25);
     recipeTitle = view.findViewById(R.id.recipe_title);
     new GrabRecipe().execute();
     return view;

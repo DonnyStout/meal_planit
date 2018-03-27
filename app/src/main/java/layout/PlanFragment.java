@@ -185,10 +185,8 @@ public class PlanFragment extends Fragment implements OnClickListener {
 
     @Override
     protected void onPostExecute(Plan plan) {
-      breakfastTitle.setText(plan.getBreakfastTitle());
-      lunchTitle.setText(plan.getLunchTitle());
-      dinnerTitle.setText(plan.getDinnerTitle());
-      retriveImages();
+      setDisplay(plan);
+
     }
 
     @Override
@@ -198,6 +196,16 @@ public class PlanFragment extends Fragment implements OnClickListener {
       snack.show();
     }
 
+  }
+
+  private void setDisplay(Plan plan) {
+    breakfastTitle.setText(plan.getBreakfastTitle());
+    lunchTitle.setText(plan.getLunchTitle());
+    dinnerTitle.setText(plan.getDinnerTitle());
+    breakfastCardView.setTag(plan.getBreakfastId());
+    lunchCardView.setTag(plan.getLunchId());
+    dinnerCardView.setTag(plan.getDinnerId());
+    retriveImages();
   }
 
   public class ImageGetter extends AsyncTask<Object, Object, Bitmap> {
@@ -210,7 +218,7 @@ public class PlanFragment extends Fragment implements OnClickListener {
     protected Bitmap doInBackground(Object... objects) {
       imageView = (ImageView) objects[2];
       Plan planByDate = database.planDao().findByDateAndPersonId(date, person.getPersonId());
-      String urlId = String.format("https://spoonacular.com/recipeImages/%1$s-480x360%2$s", objects);
+      String urlId = getString(R.string.url_id, objects[0], objects[1]);
       URL url = null;
       try {
         url = new URL(urlId);
@@ -258,13 +266,7 @@ public class PlanFragment extends Fragment implements OnClickListener {
     @Override
     protected void onPostExecute(Plan plan) {
       if (plan.getBreakfastUrl() != null) {
-        breakfastTitle.setText(plan.getBreakfastTitle());
-        lunchTitle.setText(plan.getLunchTitle());
-        dinnerTitle.setText(plan.getDinnerTitle());
-        breakfastCardView.setTag(plan.getBreakfastId());
-        lunchCardView.setTag(plan.getLunchId());
-        dinnerCardView.setTag(plan.getDinnerId());
-        retriveImages();
+        setDisplay(plan);
       }
     }
   }

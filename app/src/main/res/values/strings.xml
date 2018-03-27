@@ -30,7 +30,7 @@
   <string name="generate_button">Generate</string>
   <string name="REGEX_FOR_EXTENSION">\\.[^.\\s]+$</string>
   <string name="change_picture_button_text">change picture</string>
-  <string name="change_username_text">Confirm Username or Enter New Username</string>
+  <string name="change_username_text">Confirm Username or Enter New Username if you wish to change settings below</string>
   <string name="change_calories_text">Change Calories</string>
   <string name="change_diet_text">Change Diet</string>
   <string name="change_allergies_text">Change Allergies</string>
@@ -38,5 +38,6 @@
   <string name="settings_toolbar_menu">Settings</string>
   <string name="update_settings_button">Update Settings</string>
   <string name="recipe_url">https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/</string>
+  <string name="url_id">https://spoonacular.com/recipeImages/%1$s-480x360%2$s</string>
 
 </resources>
