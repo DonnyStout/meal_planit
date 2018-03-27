@@ -78,8 +78,11 @@ public class PlanFragment extends Fragment implements OnClickListener {
     userId = getActivity().getSharedPreferences("user_id", Context.MODE_PRIVATE)
                             .getLong("user_id", -1);
     breakfastCardView = view.findViewById(R.id.breakfast_card_view);
+    breakfastCardView.setOnClickListener(this);
     lunchCardView = view.findViewById(R.id.lunch_card_view);
+    lunchCardView.setOnClickListener(this);
     dinnerCardView = view.findViewById(R.id.dinner_card_view);
+    dinnerCardView.setOnClickListener(this);
     breakfastImage = view.findViewById(R.id.breakfast_photo);
     lunchImage = view.findViewById(R.id.lunch_photo);
     dinnerImage = view.findViewById(R.id.dinner_photo);
@@ -102,23 +105,10 @@ public class PlanFragment extends Fragment implements OnClickListener {
 
   @Override
   public void onClick(View v) {
-    bundle = new Bundle();
-    FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
-    BrowseFragment browseFragment = new BrowseFragment();
     if (generateButton.getId() == v.getId()) {
       new APICall().execute();
-    } else if (breakfastCardView.getId() == v.getId()) {
-      bundle.putString("title", breakfastTitle.toString());
-      browseFragment.setArguments(bundle);
-      fragmentTransaction.replace(R.id.content, browseFragment).addToBackStack("browse").commit();
-    } else if (lunchCardView.getId() == v.getId()) {
-      bundle.putString("title", lunchTitle.toString());
-      browseFragment.setArguments(bundle);
-      fragmentTransaction.replace(R.id.content, browseFragment).addToBackStack("browse").commit();
-    } else if (dinnerCardView.getId() == v.getId()) {
-      bundle.putString("title", dinnerTitle.toString());
-      browseFragment.setArguments(bundle);
-      fragmentTransaction.replace(R.id.content, browseFragment).addToBackStack("browse").commit();
+    } else {
+      new CVHandler().onClick(v);
     }
   }
 
@@ -130,6 +120,19 @@ public class PlanFragment extends Fragment implements OnClickListener {
   }
 
 
+
+  public class CVHandler implements CardView.OnClickListener {
+
+    @Override
+    public void onClick(View v) {
+      bundle = new Bundle();
+      FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+      BrowseFragment browseFragment = new BrowseFragment();
+      bundle.putLong("food_id", ((long) v.getTag()));
+      browseFragment.setArguments(bundle);
+      fragmentTransaction.replace(R.id.content, browseFragment).addToBackStack("browse").commit();
+    }
+  }
 
 
   public class APICall extends AsyncTask<MealList, Object, Plan> {
@@ -258,6 +261,9 @@ public class PlanFragment extends Fragment implements OnClickListener {
         breakfastTitle.setText(plan.getBreakfastTitle());
         lunchTitle.setText(plan.getLunchTitle());
         dinnerTitle.setText(plan.getDinnerTitle());
+        breakfastCardView.setTag(plan.getBreakfastId());
+        lunchCardView.setTag(plan.getLunchId());
+        dinnerCardView.setTag(plan.getDinnerId());
         retriveImages();
       }
     }

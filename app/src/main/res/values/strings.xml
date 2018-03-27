@@ -37,5 +37,6 @@
   <string name="home_toolbar_button">Home</string>
   <string name="settings_toolbar_menu">Settings</string>
   <string name="update_settings_button">Update Settings</string>
+  <string name="recipe_url">https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/</string>
 
 </resources>
