@@ -39,5 +39,9 @@
   <string name="update_settings_button">Update Settings</string>
   <string name="recipe_url">https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/</string>
   <string name="url_id">https://spoonacular.com/recipeImages/%1$s-480x360%2$s</string>
+  <string-array name="kilo_calories_intake_value"><item>1200</item> <item>1300</item> <item>1400</item> <item>1500</item>
+    <item>1600</item> <item>1700</item> <item>1800</item> <item>1900</item> <item>2000</item> <item>2100</item> <item>2200</item>
+    <item>2300</item> <item>2400</item> <item>2500</item> <item>2600</item> <item>2700</item> <item>2800</item> <item>2900</item>
+    <item>3000</item> <item>3100</item> <item>3200</item></string-array>
 
 </resources>

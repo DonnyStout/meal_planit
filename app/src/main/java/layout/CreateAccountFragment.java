@@ -31,7 +31,7 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class CreateAccountFragment extends Fragment {
+public class CreateAccountFragment extends Fragment implements OnClickListener {
 
 
   private MealDatabase database;
@@ -74,52 +74,7 @@ public class CreateAccountFragment extends Fragment {
     new DietSpinner().execute();
     new RestrictionSpinner().execute();
     adapter();
-    submitButton.setOnClickListener(new OnClickListener() {
-      @Override
-      public void onClick(View v) {
-        if (submitButton.getId() == v.getId() && !firstNameField.getText().toString().isEmpty()
-            && !lastNameField.getText().toString().isEmpty() &&
-            !usernameField.getText().toString().isEmpty()) {
-          new Thread(new Runnable() {
-            @Override
-            public void run() {
-              PersonDao usernameFind = MealDatabase.getInstance(getActivity()).personDao();
-              Person personUsernameVariable = usernameFind.findUsername(usernameField.getText().toString());
-              if (personUsernameVariable != null) {
-                snack = Snackbar.make(getActivity().findViewById(R.id.create_linear_layout),
-                    "That username already exists", Snackbar.LENGTH_LONG);
-                snack.show();
-              } else {
-                person = new Person();
-                personRestriction = new PersonRestriction();
-                person.setFirstName(firstNameField.getText().toString());
-                person.setLastName(lastNameField.getText().toString());
-                person.setUsername(usernameField.getText().toString());
-                person.setCaloriesPerDay((Integer) caloriesbox.getSelectedItem());
-                person.setDietId(((Diet) dietBox.getSelectedItem()).getDietId());
-                personRestriction.setRestrictionId(
-                    ((Restriction) allergyBox.getSelectedItem()).getRestrictionId());
-                long personId = MealDatabase.getInstance(getActivity()).personDao().insert(person);
-                personRestriction.setPersonId(personId);
-                MealDatabase.getInstance(getActivity()).personRestrictionDao()
-                    .insert(personRestriction);
-                snack = Snackbar.make(getActivity().findViewById(R.id.create_linear_layout),
-                    "Account created, please login", Snackbar.LENGTH_LONG);
-                snack.show();
-                ((LoginActivity) getActivity()).update();
-                clear();
-              }
-            }
-          }).start();
-        } else {
-          snack = Snackbar.make(getActivity().findViewById(R.id.create_linear_layout),
-              "Please check that all fields are completed", Snackbar.LENGTH_LONG);
-          snack.show();
-        }
-
-
-      }
-    });
+    submitButton.setOnClickListener(this);
     return view;
   }
 
@@ -133,11 +88,23 @@ public class CreateAccountFragment extends Fragment {
   private void adapter() {
     SpinnerAdapter caloriesAdapter = new ArrayAdapter<>(getActivity(),
         android.R.layout.simple_spinner_item,
-        Arrays.asList(1000, 1100, 1200, 1300, 1400, 1500, 1600, 1700, 1800, 1900, 2000, 2100, 2200,
-            2300, 2400, 2500, 2600, 2700, 2800, 2900, 3000, 3100, 3200, 3300, 3400, 3500));
+        Arrays.asList(getResources().getStringArray(R.array.kilo_calories_intake_value)));
     caloriesbox.setAdapter(caloriesAdapter);
   }
 
+  @Override
+  public void onClick(View v) {
+    //TODO Move id check to outer if statement; use ! for each isEmpty
+    if (submitButton.getId() == v.getId() && !firstNameField.getText().toString().isEmpty()
+        && !lastNameField.getText().toString().isEmpty() &&
+        !usernameField.getText().toString().isEmpty()) {
+      new HandleAccountCreation().execute();
+    } else {
+      snack = Snackbar.make(getActivity().findViewById(R.id.box),
+          "Please make sure all fields are completed", Snackbar.LENGTH_LONG);
+      snack.show();
+    }
+  }
 
   private class DietSpinner extends AsyncTask<Object, Object, List<Diet>> {
 
@@ -167,6 +134,7 @@ public class CreateAccountFragment extends Fragment {
     }
   }
 
+  //TODO unused task?
   private class PersonRestrictionIdInsert extends AsyncTask<Object, Object, List<Restriction>> {
 
     @Override
@@ -177,5 +145,56 @@ public class CreateAccountFragment extends Fragment {
     }
   }
 
+  private class HandleAccountCreation extends AsyncTask<Object, Object, Person> {
 
+    private Person personUsernameVariable;
+
+    @Override
+    protected Person doInBackground(Object... objects) {
+      PersonDao usernameFind = MealDatabase.getInstance(getActivity()).personDao();
+      personUsernameVariable = usernameFind.findUsername(usernameField.getText().toString());
+      if (!firstNameField.getText().toString().isEmpty() && !lastNameField.getText().toString()
+          .isEmpty() &&
+          !usernameField.getText().toString().isEmpty()) {
+        if (personUsernameVariable != null) {
+          cancel(true);
+          return null;
+        } else {
+
+          //TODO Should be local variables
+          person = new Person();
+          personRestriction = new PersonRestriction();
+          person.setFirstName(firstNameField.getText().toString());
+          person.setLastName(lastNameField.getText().toString());
+          person.setUsername(usernameField.getText().toString());
+          person.setCaloriesPerDay(Integer.parseInt(((String) caloriesbox.getSelectedItem())));
+          person.setDietId(((Diet) dietBox.getSelectedItem()).getDietId());
+          personRestriction.setRestrictionId(
+              ((Restriction) allergyBox.getSelectedItem()).getRestrictionId());
+          long personId = MealDatabase.getInstance(getActivity()).personDao().insert(person);
+          personRestriction.setPersonId(personId);
+          MealDatabase.getInstance(getActivity()).personRestrictionDao()
+              .insert(personRestriction);
+        }
+      }
+      return person;
+    }
+
+
+    @Override
+    protected void onCancelled() {
+      snack = Snackbar.make(getActivity().findViewById(R.id.box),
+          "Username Already Exists", Snackbar.LENGTH_LONG);
+      snack.show();
+    }
+
+    @Override
+    protected void onPostExecute(Person person) {
+        snack = Snackbar.make(getActivity().findViewById(R.id.box),
+            "Account Created", Snackbar.LENGTH_LONG);
+        snack.show();
+      ((LoginActivity) getActivity()).update();
+      clear();
+    }
+  }
 }

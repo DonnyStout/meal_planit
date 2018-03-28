@@ -52,7 +52,7 @@ public class CalendarFragment extends Fragment implements OnDateChangeListener {
 
   @Override
   public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
-    LocalDate localDate = new LocalDate(year, month, dayOfMonth);
+    LocalDate localDate = new LocalDate(year, month + 1, dayOfMonth);
     new PlanInstance().execute(localDate);
   }
 

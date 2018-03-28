@@ -78,11 +78,11 @@ public class PlanFragment extends Fragment implements OnClickListener {
     userId = getActivity().getSharedPreferences("user_id", Context.MODE_PRIVATE)
                             .getLong("user_id", -1);
     breakfastCardView = view.findViewById(R.id.breakfast_card_view);
-    breakfastCardView.setOnClickListener(this);
+    breakfastCardView.setOnClickListener(new CVHandler());
     lunchCardView = view.findViewById(R.id.lunch_card_view);
-    lunchCardView.setOnClickListener(this);
+    lunchCardView.setOnClickListener(new CVHandler());
     dinnerCardView = view.findViewById(R.id.dinner_card_view);
-    dinnerCardView.setOnClickListener(this);
+    dinnerCardView.setOnClickListener(new CVHandler());
     breakfastImage = view.findViewById(R.id.breakfast_photo);
     lunchImage = view.findViewById(R.id.lunch_photo);
     dinnerImage = view.findViewById(R.id.dinner_photo);
@@ -107,8 +107,6 @@ public class PlanFragment extends Fragment implements OnClickListener {
   public void onClick(View v) {
     if (generateButton.getId() == v.getId()) {
       new APICall().execute();
-    } else {
-      new CVHandler().onClick(v);
     }
   }
 
@@ -267,6 +265,8 @@ public class PlanFragment extends Fragment implements OnClickListener {
     protected void onPostExecute(Plan plan) {
       if (plan.getBreakfastUrl() != null) {
         setDisplay(plan);
+      } else {
+        new APICall().execute();
       }
     }
   }

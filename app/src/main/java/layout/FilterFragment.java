@@ -2,7 +2,6 @@ package layout;
 
 
 import static android.app.Activity.RESULT_OK;
-import static android.content.Context.MODE_PRIVATE;
 
 import android.content.Context;
 import android.content.Intent;
@@ -77,6 +76,7 @@ public class FilterFragment extends Fragment implements OnClickListener {
     new AllergyAdapter().execute();
     new DietAdapter().execute();
     adapter();
+    new SetAdapters().execute();
     return view;
   }
 
@@ -120,8 +120,7 @@ public class FilterFragment extends Fragment implements OnClickListener {
   private void adapter() {
     SpinnerAdapter caloriesAdapter = new ArrayAdapter<>(getActivity(),
         android.R.layout.simple_spinner_item,
-        Arrays.asList(1000, 1100, 1200, 1300, 1400, 1500, 1600, 1700, 1800, 1900, 2000, 2100, 2200,
-            2300, 2400, 2500, 2600, 2700, 2800, 2900, 3000, 3100, 3200, 3300, 3400, 3500));
+        Arrays.asList(getResources().getStringArray(R.array.kilo_calories_intake_value)));
     caloriesField.setAdapter(caloriesAdapter);
   }
 
@@ -175,6 +174,31 @@ public class FilterFragment extends Fragment implements OnClickListener {
     }
   }
 
+  public class SetAdapters extends AsyncTask<Object, Object, Person> {
+
+
+    private PersonRestriction personRestriction;
+
+    @Override
+    protected Person doInBackground(Object... objects) {
+      getDatabase();
+      person = database.personDao().findByPersonId(userId);
+      personRestriction = database.personRestrictionDao().findByPersonId(userId);
+      return person;
+    }
+
+    @Override
+    protected void onPostExecute(Person person) {
+      // Using - 1 because position is being read as an array while the position found doesn't start at 0.
+      dietChange.setSelection(((int)person.getDietId() - 1));
+      caloriesField.setSelection(Arrays.asList(getResources()
+          .getStringArray(R.array.kilo_calories_intake_value))
+          .indexOf(String.valueOf(person.getCaloriesPerDay())));
+      allergyChange.setSelection(((int)personRestriction.getRestrictionId() - 1));
+    }
+  }
+
+
   public class UpdateSettings extends AsyncTask<Long, Object, Object> {
 
     @Override
@@ -183,7 +207,7 @@ public class FilterFragment extends Fragment implements OnClickListener {
       person = database.personDao().findByPersonId(userId[0]);
       PersonRestriction personRestriction = database.personRestrictionDao().findByPersonId(person.getPersonId());
       person.setUsername(userField.getText().toString());
-      person.setCaloriesPerDay((Integer) caloriesField.getSelectedItem());
+      person.setCaloriesPerDay(Integer.parseInt(((String)caloriesField.getSelectedItem())));
       person.setDietId(((Diet) dietChange.getSelectedItem()).getDietId());
       personRestriction.setRestrictionId(
           ((Restriction)allergyChange.getSelectedItem()).getRestrictionId());

@@ -17,7 +17,7 @@ public interface PlanDao {
   @Query("SELECT * FROM plan WHERE date LIKE :date LIMIT 1")
   Plan findDate(LocalDate date);
 
-  @Query("SELECT * FROM plan WHERE date like :date AND person_id LIKE :personId LIMIT 2")
+  @Query("SELECT * FROM plan WHERE date like :date AND person_id LIKE :personId LIMIT 1")
   Plan findByDateAndPersonId(LocalDate date, long personId);
 
   @Query("SELECT * FROM plan WHERE breakfast_id LIKE :breakfastId LIMIT 1")
