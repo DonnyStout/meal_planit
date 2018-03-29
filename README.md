@@ -38,7 +38,7 @@ The individual meals can also be clicked on to send the user to to a recipe summ
 * Search recipes by ingredients and/or name.
 
 ### 3rd Party Licenses
-* [Retrofit Library](https://github.com/square/retrofit) & [License](https://github.com/square/retrofit/blob/master/LICENSE.txt)
+* [Retrofit Library](https://square.github.io/retrofit/) & [License](https://github.com/square/retrofit/blob/master/LICENSE.txt)
 * [Gson Library](https://github.com/google/gson) & [License](https://github.com/google/gson/blob/master/LICENSE)
 * [Joda Time Library](https://github.com/dlew/joda-time-android) & [License](https://github.com/dlew/joda-time-android/blob/master/LICENSE)
 
