@@ -1,4 +1,4 @@
-# meal_planit
+# Meal Planit
 
 
 ### Motivations
