@@ -94,7 +94,7 @@ public class FilterFragment extends Fragment implements OnClickListener {
     }
     if (update.getId() == v.getId() && userField.getText().toString().isEmpty()) {
       snack = Snackbar.make(getActivity().findViewById(R.id.content),
-          "Please confirm userId or enter new userId", Snackbar.LENGTH_LONG);
+          "Please confirm username or enter new username", Snackbar.LENGTH_LONG);
       snack.show();
     }
   }
@@ -195,6 +195,7 @@ public class FilterFragment extends Fragment implements OnClickListener {
           .getStringArray(R.array.kilo_calories_intake_value))
           .indexOf(String.valueOf(person.getCaloriesPerDay())));
       allergyChange.setSelection(((int)personRestriction.getRestrictionId() - 1));
+      userField.setText(person.getUsername());
     }
   }
 

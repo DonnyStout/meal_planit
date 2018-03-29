@@ -94,15 +94,16 @@ public class CreateAccountFragment extends Fragment implements OnClickListener {
 
   @Override
   public void onClick(View v) {
-    //TODO Move id check to outer if statement; use ! for each isEmpty
-    if (submitButton.getId() == v.getId() && !firstNameField.getText().toString().isEmpty()
-        && !lastNameField.getText().toString().isEmpty() &&
-        !usernameField.getText().toString().isEmpty()) {
-      new HandleAccountCreation().execute();
-    } else {
-      snack = Snackbar.make(getActivity().findViewById(R.id.box),
-          "Please make sure all fields are completed", Snackbar.LENGTH_LONG);
-      snack.show();
+    if (submitButton.getId() == v.getId()) {
+      if (!firstNameField.getText().toString().isEmpty()
+          && !lastNameField.getText().toString().isEmpty() &&
+          !usernameField.getText().toString().isEmpty()) {
+        new HandleAccountCreation().execute();
+      } else {
+        snack = Snackbar.make(getActivity().findViewById(R.id.box),
+            R.string.fields_snackbar, Snackbar.LENGTH_LONG);
+        snack.show();
+      }
     }
   }
 
@@ -134,20 +135,12 @@ public class CreateAccountFragment extends Fragment implements OnClickListener {
     }
   }
 
-  //TODO unused task?
-  private class PersonRestrictionIdInsert extends AsyncTask<Object, Object, List<Restriction>> {
-
-    @Override
-    protected List<Restriction> doInBackground(Object... objects) {
-      long personId = persondao.insert(person);
-      personRestriction.setPersonId(personId);
-      return null;
-    }
-  }
-
   private class HandleAccountCreation extends AsyncTask<Object, Object, Person> {
 
     private Person personUsernameVariable;
+
+    private Person person;
+    private PersonRestriction personRestriction;
 
     @Override
     protected Person doInBackground(Object... objects) {
@@ -160,8 +153,6 @@ public class CreateAccountFragment extends Fragment implements OnClickListener {
           cancel(true);
           return null;
         } else {
-
-          //TODO Should be local variables
           person = new Person();
           personRestriction = new PersonRestriction();
           person.setFirstName(firstNameField.getText().toString());
@@ -184,15 +175,15 @@ public class CreateAccountFragment extends Fragment implements OnClickListener {
     @Override
     protected void onCancelled() {
       snack = Snackbar.make(getActivity().findViewById(R.id.box),
-          "Username Already Exists", Snackbar.LENGTH_LONG);
+          R.string.user_exists_snackbar, Snackbar.LENGTH_LONG);
       snack.show();
     }
 
     @Override
     protected void onPostExecute(Person person) {
-        snack = Snackbar.make(getActivity().findViewById(R.id.box),
-            "Account Created", Snackbar.LENGTH_LONG);
-        snack.show();
+      snack = Snackbar.make(getActivity().findViewById(R.id.box),
+          R.string.account_created_snackbar, Snackbar.LENGTH_LONG);
+      snack.show();
       ((LoginActivity) getActivity()).update();
       clear();
     }

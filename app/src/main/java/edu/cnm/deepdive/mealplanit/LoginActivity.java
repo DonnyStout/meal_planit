@@ -25,6 +25,8 @@ import layout.CreateAccountFragment;
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
 
+  public static final String USER_ID_TAG = "user_id";
+  public static final String CREATE_ACCOUNT_TAG = "create_tag";
   private Person person = new Person();
   private Spinner login;
   private PersonDao persondao;
@@ -57,6 +59,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
   protected void onStart() {
     super.onStart();
     database = getDatabase();
+    new AutoComplete().execute();
   }
 
 
@@ -101,19 +104,19 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         if (enter.getId() == v.getId() && person != null) {
           Intent intent = new Intent(LoginActivity.this, MainActivity.class);
           bundle = new Bundle();
-          Editor editor = getSharedPreferences("user_id", MODE_PRIVATE).edit();
-          editor.putLong("user_id", person.getPersonId());
+          Editor editor = getSharedPreferences(USER_ID_TAG, MODE_PRIVATE).edit();
+          editor.putLong(USER_ID_TAG, person.getPersonId());
           editor.apply();
           intent.putExtras(bundle);
           startActivity(intent);
         } else if (create.getId() == v.getId()) {
           FragmentTransaction transitionSupport = getSupportFragmentManager().beginTransaction();
           createAccountFragment = new CreateAccountFragment();
-          transitionSupport.replace(R.id.box, createAccountFragment, "create_tag").commit();
+          transitionSupport.replace(R.id.box, createAccountFragment, CREATE_ACCOUNT_TAG).commit();
         } else if (login.getId() == v.getId() && createAccountFragment == null) {
 
         } else {
-          snack = Snackbar.make(findViewById(R.id.coordinator_layout), "Username not found",
+          snack = Snackbar.make(findViewById(R.id.coordinator_layout), R.string.login_not_found_snackbar,
               Snackbar.LENGTH_LONG);
           snack.show();
         }
