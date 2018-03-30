@@ -1,5 +1,7 @@
 # Meal Planit
 
+[Javadoc](docs/index.html)
+
 
 ### Motivations
 There are a handful of meal logging apps but there aren't many meal planning apps. Meal Planit was an approach to trying to
@@ -14,10 +16,10 @@ auto-generate a plan when a day is clicked for that date. The plan can be regene
 The individual meals can also be clicked on to send the user to to a recipe summary of that meal.
 
 #### * Unemplemented/Incomplete elements:
-* Visually shows the current day as the same date for each year when going through the calendarview.
 * If going through menus too fast fragments can lock up or overlay.
 * No database table implemented for calories.
 * Join queries not implemented.
+* Visually shows the current day as the same date for each year when going through the calendarview.
 * Currently keeping track of a user through shared preferences and database queries instead of keeping an object with those items.
 
 ### Devices Tested On
@@ -32,6 +34,8 @@ The individual meals can also be clicked on to send the user to to a recipe summ
 * Less unused Realestate in settings.
 
 ### Stretch goals
+* Implementing the user being able to have multiple allergies.
+* Implementing a table for dislikes in Restrictions table.
 * Allow the ability to customize the meal plan from a list of options.
 * A search function for a list of various meals.
 * Including budget taken into account as a modifier for meal plans.
