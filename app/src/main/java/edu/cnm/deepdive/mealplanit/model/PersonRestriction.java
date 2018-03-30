@@ -1,10 +1,21 @@
 package edu.cnm.deepdive.mealplanit.model;
 
 
-import android.arch.persistence.room.*;
+
 
 import static android.arch.persistence.room.ForeignKey.CASCADE;
 
+import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.ForeignKey;
+import android.arch.persistence.room.PrimaryKey;
+
+/**
+ * Model that holds the information for creating the {@link PersonRestriction} table in the database.
+ * Accessed and modify through the user of accessors and mutators. This model holds the information so
+ * if multiple {@link Restriction} are allowed in a future iteration, this would make a many to many
+ * into a one to many between {@link Person} and {@link Restriction}
+ */
 @Entity(foreignKeys = {@ForeignKey(entity = Person.class,
     parentColumns = "person_id",
     childColumns = "person_id",

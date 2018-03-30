@@ -4,6 +4,9 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
+/**
+ * Handles that response from the API with {@link retrofit2.Retrofit} as a list of meals.
+ */
 public class MealList {
 
   @SerializedName("meals")
@@ -15,11 +18,10 @@ public class MealList {
     return meals;
   }
 
-  public void setMeals(List<Meal> meals) {
-    this.meals = meals;
-  }
 
-
+  /**
+   * The meals that are listed in the <code>MealList</code> parent class and handles the response received.
+   */
   public class Meal {
 
     @SerializedName("id")
@@ -30,17 +32,9 @@ public class MealList {
     @Expose
     private String title;
 
-    @SerializedName("readyInMinutes")
-    @Expose
-    private Integer readyInMinutes;
-
     @SerializedName("image")
     @Expose
     private String image;
-
-    @SerializedName("imageUrls")
-    @Expose
-    private List<String> imageUrls = null;
 
     public Long getId() {
       return id;
@@ -58,13 +52,6 @@ public class MealList {
       this.title = title;
     }
 
-    public Integer getReadyInMinutes() {
-      return readyInMinutes;
-    }
-
-    public void setReadyInMinutes(Integer readyInMinutes) {
-      this.readyInMinutes = readyInMinutes;
-    }
 
     public String getImage() {
       return image;
@@ -72,14 +59,6 @@ public class MealList {
 
     public void setImage(String image) {
       this.image = image;
-    }
-
-    public List<String> getImageUrls() {
-      return imageUrls;
-    }
-
-    public void setImageUrls(List<String> imageUrls) {
-      this.imageUrls = imageUrls;
     }
 
   }

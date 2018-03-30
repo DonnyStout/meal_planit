@@ -20,15 +20,12 @@ import edu.cnm.deepdive.mealplanit.model.Person;
 import java.io.IOException;
 
 /**
- * A [@link Fragment] class that the user is greeted with after logging in. It is the main interface
- * of the entire application. The contents displayed within this fragment are the user's name and
- * userId along with a picture that the user can upload.
+ * A {@link Fragment} class that the user is greeted with after logging in. It is the main interface
+ * of the entire application. The contents displayed within this fragment are the user's first name last name and
+ * username along with a picture that the user can upload. It also includes the {@link CalendarFragment} within this
+ * fragment.
  */
 public class AccountFragment extends Fragment implements View.OnClickListener {
-
-
-  private static final String FIRST_LAST_NAME_TEXT = "replaceable_name_text";
-  private static final String USERNAME_TEXT = "replaceable_username";
 
 
   private MealDatabase database;
@@ -36,17 +33,10 @@ public class AccountFragment extends Fragment implements View.OnClickListener {
   private Person person;
   private TextView name;
   private TextView username;
-  private FrameLayout calendarFrame;
   private ImageButton imageButton;
 
 
-  /**
-   * Uses a saved instance of the userId the user entered in the login activity using shared
-   * preferences. Creates all the instances of [@link Button], [@link EditText], and [@link
-   * TextView].
-   *
-   * @param inflater Inflates the view from the xml file.
-   */
+
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
       Bundle savedInstanceState) {
@@ -88,7 +78,8 @@ public class AccountFragment extends Fragment implements View.OnClickListener {
 
     @Override
     protected Person doInBackground(Object... objects) {
-      person = MealDatabase.getInstance(getActivity()).personDao().findByPersonId(userId);
+      getDatabase();
+      person = database.personDao().findByPersonId(userId);
       return person;
     }
 

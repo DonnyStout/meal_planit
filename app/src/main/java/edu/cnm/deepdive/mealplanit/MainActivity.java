@@ -1,10 +1,7 @@
 package edu.cnm.deepdive.mealplanit;
 
-import android.app.FragmentTransaction;
 import android.arch.persistence.room.Room;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -14,17 +11,17 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import edu.cnm.deepdive.mealplanit.db.MealDatabase;
 import layout.AccountFragment;
-import layout.BrowseFragment;
-import layout.CalendarFragment;
 import layout.FilterFragment;
-import layout.PlanFragment;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * The Main Activity for the entire application that controls the functions of the fragments for
- * <code>AccountFragment</code>, <code>BrowseFragment</code>, <code>CalendarFragment</code>,
- * <code>PlanFragment</code>, and <code>FilterFragment</code>.
+ * <code>AccountFragment</code> and {@link layout.CalendarFragment}. {@link MainActivity#getDatabase()} has the method
+ * to get an instance of the {@link MealDatabase} and {@link MainActivity#getRetrofit()} is a method that gets
+ * a builder pattern of {@link Retrofit}.
+ *
+ * Author Donny Stout - version 1.0
  */
 public class MainActivity extends AppCompatActivity {
 
@@ -75,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
   }
 
   /**
-   * Getting an instance of the <code>MealDatabase</code> and if empty gets the [@link Context] and
+   * Getting an instance of the {@link MealDatabase} and if empty gets the {@link android.content.Context} and
    * builds the database before returning the database.
    *
    * @return Mealdatabase.
@@ -89,6 +86,14 @@ public class MainActivity extends AppCompatActivity {
   }
 
 
+  /**
+   * Checks to see if retrofit already exists, if not it builds a pattern for {@link Retrofit} that
+   * allows for the service call {@link edu.cnm.deepdive.mealplanit.servicemodel.MealList} and
+   * {@link edu.cnm.deepdive.mealplanit.servicemodel.MealList.Meal} and converts it with {@link GsonConverterFactory}
+   * to a {@link Gson} object. If it does exist it returns that instance of retrofit.
+   *
+   * @return                                      A built retrofit object.
+   */
   public Retrofit getRetrofit() {
     if (retrofit == null) {
       Gson gson = new GsonBuilder()

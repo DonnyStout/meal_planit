@@ -1,12 +1,19 @@
 package edu.cnm.deepdive.mealplanit.model;
 
 
-import android.arch.persistence.room.*;
-import android.net.Uri;
-import android.support.annotation.NonNull;
-
 import static android.arch.persistence.room.ForeignKey.CASCADE;
 
+import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.ForeignKey;
+import android.arch.persistence.room.Index;
+import android.arch.persistence.room.PrimaryKey;
+import android.support.annotation.NonNull;
+
+/**
+ * Model for creating the {@link Person} table in the database that allows accessors and mutators to access or change the
+ * the information in the table. This model holds the information for all the users in the database.
+ */
 @Entity(indices = {@Index(value = {"username"}, unique = true)},
     foreignKeys = {@ForeignKey(entity = Diet.class,
         parentColumns = "diet_id",

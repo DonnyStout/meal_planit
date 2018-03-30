@@ -21,15 +21,14 @@ import edu.cnm.deepdive.mealplanit.model.PlanRestriction;
 import org.joda.time.LocalDate;
 
 /**
- * A simple {@link Fragment} subclass.
+ * {@link Fragment} that opens within {@link AccountFragment} when the user logs in. It creates a new
+ * instance of {@link Plan} for each date the user clicks unless there is a plan already for that date.
  */
 public class CalendarFragment extends Fragment implements OnDateChangeListener {
 
 
   private MealDatabase database;
   private Long userId;
-  private Bundle date;
-  private Person person;
 
   public CalendarFragment() {
     // Required empty public constructor
@@ -68,7 +67,7 @@ public class CalendarFragment extends Fragment implements OnDateChangeListener {
     @Override
     protected Plan doInBackground(LocalDate... date) {
       getDatabase();
-      person = database.personDao().findByPersonId(userId);
+      Person person = database.personDao().findByPersonId(userId);
       planInstance =database.planDao().findByDateAndPersonId(date[0], person.getPersonId());
       if (planInstance == null) {
         planInstance = new Plan();
@@ -92,7 +91,7 @@ public class CalendarFragment extends Fragment implements OnDateChangeListener {
 
     @Override
     protected void onPostExecute(Plan plan) {
-      date = new Bundle();
+      Bundle date = new Bundle();
       date.putString("plan_date", plan.getDate().toString());
       android.support.v4.app.FragmentTransaction transaction = getFragmentManager()
           .beginTransaction();

@@ -32,7 +32,9 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * A simple {@link Fragment} subclass.
+ * A {@link Fragment} that allows the user to change their settings in the database along with the ability to upload a picture
+ * using {@link Intent}. Uses {@link Spinner} and {@link ArrayAdapter} to display the selectable options that fit
+ * the users settings in the {@link MealDatabase} and to update them.
  */
 public class FilterFragment extends Fragment implements OnClickListener {
 
@@ -94,7 +96,7 @@ public class FilterFragment extends Fragment implements OnClickListener {
     }
     if (update.getId() == v.getId() && userField.getText().toString().isEmpty()) {
       snack = Snackbar.make(getActivity().findViewById(R.id.content),
-          "Please confirm username or enter new username", Snackbar.LENGTH_LONG);
+          R.string.confirm_username_text, Snackbar.LENGTH_LONG);
       snack.show();
     }
   }
@@ -111,7 +113,7 @@ public class FilterFragment extends Fragment implements OnClickListener {
       imageUri = data.getData();
       new ChangeUserPhoto().execute();
     } else {
-      snack = Snackbar.make(getView().findViewById(R.id.filter_list), "Something went wrong",
+      snack = Snackbar.make(getView().findViewById(R.id.filter_list), R.string.could_not_upload,
           Snackbar.LENGTH_LONG);
       snack.show();
     }
@@ -124,7 +126,7 @@ public class FilterFragment extends Fragment implements OnClickListener {
     caloriesField.setAdapter(caloriesAdapter);
   }
 
-  public class ChangeUserPhoto extends AsyncTask<Object, Object, Person> {
+  private class ChangeUserPhoto extends AsyncTask<Object, Object, Person> {
 
       @Override
       protected Person doInBackground(Object... objects) {
@@ -141,7 +143,7 @@ public class FilterFragment extends Fragment implements OnClickListener {
       }
     }
 
-  public class AllergyAdapter extends AsyncTask<Object, Object, List<Restriction>> {
+  private class AllergyAdapter extends AsyncTask<Object, Object, List<Restriction>> {
 
     @Override
     protected List<Restriction> doInBackground(Object... objects) {
@@ -158,7 +160,7 @@ public class FilterFragment extends Fragment implements OnClickListener {
   }
 
 
-  public class DietAdapter extends AsyncTask<Object, Object, List<Diet>> {
+  private class DietAdapter extends AsyncTask<Object, Object, List<Diet>> {
 
     @Override
     protected List<Diet> doInBackground(Object... objects) {
@@ -174,7 +176,7 @@ public class FilterFragment extends Fragment implements OnClickListener {
     }
   }
 
-  public class SetAdapters extends AsyncTask<Object, Object, Person> {
+  private class SetAdapters extends AsyncTask<Object, Object, Person> {
 
 
     private PersonRestriction personRestriction;
@@ -200,7 +202,7 @@ public class FilterFragment extends Fragment implements OnClickListener {
   }
 
 
-  public class UpdateSettings extends AsyncTask<Long, Object, Object> {
+  private class UpdateSettings extends AsyncTask<Long, Object, Object> {
 
     @Override
     protected Object doInBackground(Long... userId) {
@@ -221,7 +223,7 @@ public class FilterFragment extends Fragment implements OnClickListener {
     @Override
     protected void onPostExecute(Object o) {
       snack = Snackbar.make(getActivity().findViewById(R.id.content),
-          "Settings Updated", Snackbar.LENGTH_LONG);
+          R.string.settings_success, Snackbar.LENGTH_LONG);
       snack.show();
     }
   }

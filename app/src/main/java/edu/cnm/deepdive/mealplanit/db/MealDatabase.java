@@ -44,8 +44,8 @@ public abstract class MealDatabase extends RoomDatabase {
   /**
    * A method to check to see if the <code>MealDatabase</code> is empty and if so to build an instance of
    * a builder method using Room to create a callback.
-   * @param context         Takes in a [@link Context]
-   * @return                The Mealdatabase created with the database builder.
+   * @param context         Takes in a {@link Context}
+   * @return                The {@link MealDatabase} created with the database builder.
    */
     public static MealDatabase getInstance(Context context) {
         if (instance == null) {
@@ -73,7 +73,7 @@ public abstract class MealDatabase extends RoomDatabase {
 
 
     /**
-     * Method that utilizes SQL to place specific items in the database during the [@link onCreate]
+     * Method that utilizes SQL to place specific items in the database during the onCreate
      * portion of the lifecycle if the database table are empty.
      *
      * @param data          Local variable for the MealDatabase.
@@ -98,7 +98,7 @@ public abstract class MealDatabase extends RoomDatabase {
                             "('Pescetarian'), ('Vegan'), ('Vegetarian'), ('Ketogenic'), ('Whole 30')");
                     data.setTransactionSuccessful();
                   } catch  (Exception e) {
-                    Log.d("exception occured", e.toString());
+                    Log.d("exception occurred", e.toString());
                   } finally {
                     data.endTransaction();
                   }

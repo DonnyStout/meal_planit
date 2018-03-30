@@ -1,59 +1,40 @@
 package edu.cnm.deepdive.mealplanit.dao;
 
-import android.arch.persistence.room.*;
+import android.arch.persistence.room.Dao;
+import android.arch.persistence.room.Insert;
+import android.arch.persistence.room.Query;
+import android.arch.persistence.room.Update;
 import edu.cnm.deepdive.mealplanit.model.Plan;
-
-import java.util.Date;
-import java.util.List;
 import org.joda.time.LocalDate;
 
+/**
+ * Data access object for the {@link Plan} model.
+ */
 @Dao
 public interface PlanDao {
 
-
-  @Query("SELECT * FROM plan")
-  List<Plan> getAll();
-
-  @Query("SELECT * FROM plan WHERE date LIKE :date LIMIT 1")
-  Plan findDate(LocalDate date);
-
+  /**
+   * Query that finds the row in the table by a date using {@link LocalDate} and <code>Person</code> id.
+   * @param date                              The date that has been allocated to that plan.
+   * @param personId                          The identifier for which person the plan belongs to.
+   * @return                                  A Plan.
+   */
   @Query("SELECT * FROM plan WHERE date like :date AND person_id LIKE :personId LIMIT 1")
   Plan findByDateAndPersonId(LocalDate date, long personId);
 
-  @Query("SELECT * FROM plan WHERE breakfast_id LIKE :breakfastId LIMIT 1")
-  Plan findBreakfastId(Long breakfastId);
-
-  @Query("SELECT * FROM plan WHERE breakfast_title LIKE :breakfastTitle LIMIT 1")
-  Plan findBreakfastTitle(String breakfastTitle);
-
-  @Query("SELECT * FROM plan WHERE breakfast_url LIKE :breakfastUrl LIMIT 1")
-  Plan findBreakfastUrl(String breakfastUrl);
-
-  @Query("SELECT * FROM plan WHERE lunch_id LIKE :lunchId LIMIT 1")
-  Plan findLunchId(Long lunchId);
-
-  @Query("SELECT * FROM plan WHERE lunch_title LIKE :lunchTitle LIMIT 1")
-  Plan findLunchTitle(String lunchTitle);
-
-  @Query("SELECT * FROM plan WHERE lunch_url LIKE :lunchUrl LIMIT 1")
-  Plan findLunchUrl(String lunchUrl);
-
-  @Query("SELECT * FROM plan WHERE dinner_id LIKE :dinnerId LIMIT 1")
-  Plan findDinnerId(Long dinnerId);
-
-  @Query("SELECT * FROM plan WHERE dinner_title LIKE :dinnerTitle LIMIT 1")
-  Plan findDinnerTitle(String dinnerTitle);
-
-  @Query("SELECT * FROM plan WHERE dinner_url LIKE :dinnerUrl LIMIT 1")
-  Plan findDinnerUrl(String dinnerUrl);
-
-  @Query("SELECT * FROM plan WHERE person_id LIKE :personId LIMIT 1")
-      Plan findByPersonId(long personId);
-
-
+  /**
+   * Allows for the insertion of new plans rows into the table.
+   * @param plan                              An insertion of the plan table.
+   * @return                                  A {@link long}.
+   */
   @Insert
   long insert(Plan plan);
 
+  /**
+   * Updates the row in the plan table.
+   * @param plan                              A plan table to be updated.
+   * @return                                  A {@link int}
+   */
   @Update
   int update(Plan plan);
 }

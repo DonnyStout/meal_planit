@@ -1,16 +1,18 @@
 package edu.cnm.deepdive.mealplanit.model;
 
+import static android.arch.persistence.room.ForeignKey.CASCADE;
+
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 
-import com.google.gson.annotations.Expose;
-import java.util.Date;
-
-import static android.arch.persistence.room.ForeignKey.CASCADE;
-
+/**
+ * Model that holds the information for the {@link Plan} table when it is created in the database.
+ * A user can have multiple plans and are connected by having an id for both {@link Person} and
+ * {@link Diet}.
+ */
 @Entity(foreignKeys = {@ForeignKey(entity = Person.class,
     parentColumns = "person_id",
     childColumns = "person_id",

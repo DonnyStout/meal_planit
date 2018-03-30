@@ -10,40 +10,31 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-
-import android.widget.*;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 import edu.cnm.deepdive.mealplanit.LoginActivity;
-import edu.cnm.deepdive.mealplanit.dao.DietDao;
-import edu.cnm.deepdive.mealplanit.dao.PersonDao;
-import edu.cnm.deepdive.mealplanit.dao.PlanRestrictionDao;
-import edu.cnm.deepdive.mealplanit.dao.RestrictionDao;
 import edu.cnm.deepdive.mealplanit.R;
+import edu.cnm.deepdive.mealplanit.dao.PersonDao;
 import edu.cnm.deepdive.mealplanit.db.MealDatabase;
 import edu.cnm.deepdive.mealplanit.model.Diet;
 import edu.cnm.deepdive.mealplanit.model.Person;
 import edu.cnm.deepdive.mealplanit.model.PersonRestriction;
-import edu.cnm.deepdive.mealplanit.model.PlanRestriction;
 import edu.cnm.deepdive.mealplanit.model.Restriction;
-
 import java.util.Arrays;
 import java.util.List;
 
 /**
- * A simple {@link Fragment} subclass.
+ * A {@link Fragment} that handles dealing with creating a new user. It checks to see if all fields are
+ * filled and also makes sure the username chosen isn't already in the database. Once the account is
+ * created it updates the spinner in {@link LoginActivity} with {@link LoginActivity#update()}.
  */
 public class CreateAccountFragment extends Fragment implements OnClickListener {
 
 
-  private MealDatabase database;
-  private Person person;
-  private PersonDao persondao;
-  private Diet diet;
-  private DietDao dietDao;
-  private Restriction restriction;
-  private RestrictionDao restrictionDao;
-  private PlanRestriction planRestriction;
-  private PlanRestrictionDao planRestrictionDao;
-  private PersonRestriction personRestriction;
+
   private EditText firstNameField;
   private EditText lastNameField;
   private EditText usernameField;
@@ -54,6 +45,9 @@ public class CreateAccountFragment extends Fragment implements OnClickListener {
   private Snackbar snack;
 
 
+  /**
+   * An empty parameter {@link java.lang.reflect.Constructor}.
+   */
   public CreateAccountFragment() {
     // Required empty public constructor
   }
@@ -138,14 +132,13 @@ public class CreateAccountFragment extends Fragment implements OnClickListener {
   private class HandleAccountCreation extends AsyncTask<Object, Object, Person> {
 
     private Person personUsernameVariable;
-
     private Person person;
     private PersonRestriction personRestriction;
 
     @Override
     protected Person doInBackground(Object... objects) {
       PersonDao usernameFind = MealDatabase.getInstance(getActivity()).personDao();
-      personUsernameVariable = usernameFind.findUsername(usernameField.getText().toString());
+      personUsernameVariable = usernameFind.findByUsername(usernameField.getText().toString());
       if (!firstNameField.getText().toString().isEmpty() && !lastNameField.getText().toString()
           .isEmpty() &&
           !usernameField.getText().toString().isEmpty()) {

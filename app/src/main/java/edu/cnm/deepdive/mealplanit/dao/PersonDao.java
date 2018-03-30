@@ -6,43 +6,55 @@ import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Update;
 import edu.cnm.deepdive.mealplanit.model.Person;
-
 import java.util.List;
 
 /**
- * Data access object for the <code>Person</code> model.
+ * Data access object for the {@link Person} model.
  */
 @Dao
 public interface PersonDao {
 
-  //    Queries the database to list all of the people
+  /**
+   * Queries the database to list all of the people in the database.
+   *
+   * @return                           A Person.
+   */
   @Query("SELECT * FROM person")
   List<Person> getAll();
 
+  /**
+   * Queries the database to find a person by their id.
+   *
+   * @param personId                    The id that a person has assigned to them.
+   * @return                            A person.
+   */
   @Query("SELECT * FROM person WHERE person_id LIKE :personId LIMIT 1")
   Person findByPersonId(Long personId);
 
-  @Query("SELECT * FROM person WHERE first_name LIKE :firstName LIMIT 1")
-  Person findFirstName(String firstName);
-
-
-  @Query("SELECT * FROM person WHERE last_name LIKE :lastName LIMIT 1")
-  Person findLastName(String lastName);
-
-
+  /**
+   * Finds a user by their username.
+   *
+   * @param username                    A {@link String} of the persons username.
+   * @return                            A Person.
+   */
   @Query("SELECT * From person WHERE username LIKE :username LIMIT 1")
-  Person findUsername(String username);
+  Person findByUsername(String username);
 
-
-  @Query("SELECT * From person WHERE calories_per_day LIKE :caloriesPerDay LIMIT 1")
-  Person findCaloriesPerDay(long caloriesPerDay);
-
-  @Query("SELECT * FROM person WHERE image_uri LIKE :imageUri LIMIT 1")
-  Person findByImageUri(String imageUri);
-
+  /**
+   * Allows for the insertion into the Person table.
+   *
+   * @param person                      Inserts a person.
+   * @return                            A {@link long}.
+   */
   @Insert
   long insert(Person person);
 
+  /**
+   * Allows to update the Person table.
+   *
+   * @param person                      Updates a Person.
+   * @return                            A {@link int}.
+   */
   @Update
   int update(Person person);
 }

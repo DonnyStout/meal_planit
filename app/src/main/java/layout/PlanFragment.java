@@ -38,7 +38,10 @@ import org.joda.time.LocalDate;
 import retrofit2.Retrofit;
 
 /**
- * A simple {@link Fragment} subclass.
+ * A {@link Fragment} that handles with updating the plan with the {@link MealList} and {@link Meal}
+ * that {@link Retrofit} returns from the API. Places them into a {@link CardView} that then implement {@link OnClickListener}
+ * to either generate the plan again once it has been generated, or allow the user to click on a {@link CardView}
+ * to then take them to the {@link BrowseFragment} for a recipe summary for that meal.
  */
 public class PlanFragment extends Fragment implements OnClickListener {
 
@@ -47,7 +50,6 @@ public class PlanFragment extends Fragment implements OnClickListener {
 
   private MealDatabase database;
   private Person person;
-  private Diet diet;
   private CardView breakfastCardView;
   private CardView lunchCardView;
   private CardView dinnerCardView;
@@ -62,7 +64,6 @@ public class PlanFragment extends Fragment implements OnClickListener {
   private Plan plan;
   private Long userId;
   private Snackbar snack;
-  private Bundle bundle;
 
 
   public PlanFragment() {
@@ -111,19 +112,18 @@ public class PlanFragment extends Fragment implements OnClickListener {
   }
 
 
-  public void retriveImages() {
+  private void retriveImages() {
     new ImageGetter().execute(plan.getBreakfastId(), plan.getBreakfastUrl(), breakfastImage);
     new ImageGetter().execute(plan.getLunchId(), plan.getLunchUrl(), lunchImage);
     new ImageGetter().execute(plan.getDinnerId(), plan.getDinnerUrl(), dinnerImage);
   }
 
 
-
-  public class CVHandler implements CardView.OnClickListener {
+  private class CVHandler implements CardView.OnClickListener {
 
     @Override
     public void onClick(View v) {
-      bundle = new Bundle();
+      Bundle bundle = new Bundle();
       FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
       BrowseFragment browseFragment = new BrowseFragment();
       bundle.putLong("food_id", ((long) v.getTag()));
@@ -133,7 +133,7 @@ public class PlanFragment extends Fragment implements OnClickListener {
   }
 
 
-  public class APICall extends AsyncTask<MealList, Object, Plan> {
+  private class APICall extends AsyncTask<MealList, Object, Plan> {
 
 
     private Exception exception;
@@ -206,7 +206,7 @@ public class PlanFragment extends Fragment implements OnClickListener {
     retriveImages();
   }
 
-  public class ImageGetter extends AsyncTask<Object, Object, Bitmap> {
+  private class ImageGetter extends AsyncTask<Object, Object, Bitmap> {
 
     Exception exception;
 
@@ -251,7 +251,7 @@ public class PlanFragment extends Fragment implements OnClickListener {
     }
   }
 
-  public class DataBaseQuery extends AsyncTask<Object, Object, Plan>{
+  private class DataBaseQuery extends AsyncTask<Object, Object, Plan>{
 
     @Override
     protected Plan doInBackground(Object... objects) {

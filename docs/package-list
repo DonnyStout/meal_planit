@@ -1,0 +1,8 @@
+edu.cnm.deepdive.mealplanit
+edu.cnm.deepdive.mealplanit.converter
+edu.cnm.deepdive.mealplanit.dao
+edu.cnm.deepdive.mealplanit.db
+edu.cnm.deepdive.mealplanit.model
+edu.cnm.deepdive.mealplanit.service
+edu.cnm.deepdive.mealplanit.servicemodel
+layout

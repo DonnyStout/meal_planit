@@ -43,6 +43,10 @@
   <string name="user_exists_snackbar">Username Already Exists</string>
   <string name="account_created_snackbar">Account Created</string>
   <string name="login_not_found_snackbar">Username not found</string>
+  <string name="recipe_not_found_text">Recipe could not be displayed</string>
+  <string name="confirm_username_text">Please confirm username or enter new username</string>
+  <string name="could_not_upload">Could not upload picture, try again.</string>
+  <string name="settings_success">Settings Updated</string>
   <string-array name="kilo_calories_intake_value"><item>1200</item> <item>1300</item> <item>1400</item> <item>1500</item>
     <item>1600</item> <item>1700</item> <item>1800</item> <item>1900</item> <item>2000</item> <item>2100</item> <item>2200</item>
     <item>2300</item> <item>2400</item> <item>2500</item> <item>2600</item> <item>2700</item> <item>2800</item> <item>2900</item>

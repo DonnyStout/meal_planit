@@ -20,16 +20,15 @@ import layout.CreateAccountFragment;
 
 /**
  * A login activity that queries the database to see if a username that is provided exists and if
- * not allows for a new user to create an account.
+ * not allows for a new user to navigate to the page to create an account.
  */
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
 
-  public static final String USER_ID_TAG = "user_id";
-  public static final String CREATE_ACCOUNT_TAG = "create_tag";
+  private static final String USER_ID_TAG = "user_id";
+  private static final String CREATE_ACCOUNT_TAG = "create_tag";
   private Person person = new Person();
   private Spinner login;
-  private PersonDao persondao;
   private MealDatabase database;
   private Button enter;
   private Button create;
@@ -37,7 +36,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
   private String loginString;
   private Bundle bundle;
   private CreateAccountFragment createAccountFragment;
-  private List<Person> people;
 
 
   @Override
@@ -54,7 +52,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     new AutoComplete().execute();
   }
 
-
   @Override
   protected void onStart() {
     super.onStart();
@@ -64,8 +61,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
 
   private void userLogin(String username) {
-    persondao = database.personDao();
-    person = persondao.findUsername(username);
+    PersonDao persondao = database.personDao();
+    person = persondao.findByUsername(username);
   }
 
   private String getText() {
@@ -82,16 +79,19 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     return MealDatabase.getInstance(this);
   }
 
+  /**
+   * Queries the database for the usernames in <code>Person</code> and updates the spinner to log in.
+   */
   public void update() {
     new AutoComplete().execute();
   }
 
   /**
    * Logic for logging in comparing the username provided against the database and seeing if it
-   * exists. If so it switches to the <code>AccountFragment</code>. Also allows the user to create a
-   * new account by switching to the <code>CreateAccountFragment</code>.
+   * exists. If so it switches to the {@link layout.AccountFragment}. Also allows the user to create a
+   * new account by switching to the {@link CreateAccountFragment}.
    *
-   * @param v The enter and create [@link Button]
+   * @param v The enter and create {@link Button}
    */
   @Override
   public void onClick(final View v) {
@@ -113,8 +113,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
           FragmentTransaction transitionSupport = getSupportFragmentManager().beginTransaction();
           createAccountFragment = new CreateAccountFragment();
           transitionSupport.replace(R.id.box, createAccountFragment, CREATE_ACCOUNT_TAG).commit();
-        } else if (login.getId() == v.getId() && createAccountFragment == null) {
-
         } else {
           snack = Snackbar.make(findViewById(R.id.coordinator_layout), R.string.login_not_found_snackbar,
               Snackbar.LENGTH_LONG);
@@ -124,7 +122,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }).start();
   }
 
-  public class AutoComplete extends AsyncTask<Object, Object, List<Person>> {
+  private class AutoComplete extends AsyncTask<Object, Object, List<Person>> {
 
     @Override
     protected List<Person> doInBackground(Object... objects) {

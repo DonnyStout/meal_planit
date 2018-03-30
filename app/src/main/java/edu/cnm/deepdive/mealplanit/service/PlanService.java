@@ -5,9 +5,11 @@ import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
-import retrofit2.http.Path;
 import retrofit2.http.Query;
 
+/**
+ * A service interface for {@link retrofit2.Retrofit} that makes an API call to generate a meal plan.
+ */
 public interface PlanService {
 
   @Headers("Accept: application/json")

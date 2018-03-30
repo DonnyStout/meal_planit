@@ -22,7 +22,11 @@ import java.io.IOException;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-
+/**
+ * {@link Fragment} that displays a recipe summary that has been received by the API from {@link Retrofit} within
+ * a {@link CardView}.
+ *
+ */
 public class BrowseFragment extends Fragment {
 
 
@@ -33,6 +37,9 @@ public class BrowseFragment extends Fragment {
   private Long foodId;
 
 
+  /**
+   * An empty parameter constructor for {@link BrowseFragment}.
+   */
   public BrowseFragment() {
     // Required empty public constructor
   }
@@ -57,7 +64,7 @@ public class BrowseFragment extends Fragment {
     return database;
   }
 
-  public class GrabRecipe extends AsyncTask<Recipe, Object, Recipe> {
+  private class GrabRecipe extends AsyncTask<Recipe, Object, Recipe> {
 
     private Exception exception;
     private Snackbar snack;
@@ -91,7 +98,7 @@ public class BrowseFragment extends Fragment {
 
     @Override
     protected void onCancelled() {
-      snack = Snackbar.make(getActivity().findViewById(R.id.content), "Recipe could not be displayed", Snackbar.LENGTH_LONG);
+      snack = Snackbar.make(getActivity().findViewById(R.id.content), R.string.recipe_not_found_text, Snackbar.LENGTH_LONG);
       snack.show();
     }
   }
